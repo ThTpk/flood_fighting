@@ -154,7 +154,7 @@ ol{margin:0;padding-left:1.3em;display:grid;gap:6px;font-size:14px}
 
   <section class="costs refs">
     <h2>มาตรฐานและคู่มือที่ใช้อ้างอิงขั้นตอนการทำงาน</h2>
-    <p class="foot">รายการเดียวกับในรายงานแนวทางแก้ไข ใช้ประกอบการกำหนดวิธีทำงาน การตรวจรับ และการเขียน TOR มาตรฐาน EN และ ACI บางฉบับต้องซื้อ ลิงก์จะพาไปหน้ารายละเอียดหรือหน้าตัวอย่าง</p>
+    <p class="foot">ใช้ประกอบการกำหนดวิธีทำงาน การตรวจรับ และการเขียน TOR ตรวจลิงก์ทุกรายการแล้วเมื่อ 12 ต.ค. 2569 มาตรฐาน ACI 224.1R, ACI 546R และ EN 12063 ไม่ได้ใส่ลิงก์ไว้ เพราะเปิดอ่านได้แค่บทคัดย่อหรือหน้าขายเท่านั้น</p>
     <div class="rgrid" id="ggrid"></div>
   </section>
 
@@ -200,7 +200,7 @@ const M=[
  stepsTitle:'ขั้นตอนหลัก',
  steps:['ก่อกระสอบทรายเป็นวงรอบจุดน้ำผุด ให้น้ำในวงยกตัวขึ้น ห้ามอุดจุดผุดจนสนิท เพราะน้ำจะไปผุดจุดใหม่','ขุดรางระบายชั่วคราวด้านในแนวกำแพง รวบรวมน้ำไปบ่อพักแล้วสูบออก','ติดตั้งหรือซ่อมวาล์วกันน้ำย้อน (Flap valve) ที่ปากท่อระบายลงคลอง','ตัดต้นไม้และวัชพืชชิดกำแพง ทำหมุดวัดระดับน้ำ และถ่ายภาพจุดเดิมทุกสัปดาห์'],
  cost:'80,000–250,000',cu:'บาท เหมาจ่าย',unit:'ขึ้นกับจำนวนจุดผุดและปากท่อ',extra:'',
- refs:[['USACE Sandbag Pamphlet','https://extension.usu.edu/post-wildfire/files/USACE-Sandbag-Pamphlet.pdf','คู่มือกองทัพวิศวกรสหรัฐฯ มีภาพการก่อวงกระสอบทรายรอบจุดน้ำผุด (PDF)'],['Tideflex valves vs flap valves','https://measurit.odoo.com/blog/tideflex-checkmate-valve-benefits-3/tideflex-valves-vs-flap-valves-5','เปรียบเทียบวาล์วกันน้ำย้อนแบบบานพับกับแบบยาง พร้อมภาพ'],['Tideflex check valves for backflow prevention','https://stormwater.com/home/product/33043110/tideflex-check-valves-for-backflow-prevention','ตัวอย่างวาล์วกันย้อนที่ปากท่อระบายลงแหล่งน้ำ']],fit:'ทำทันทีในทุกช่วงที่พบน้ำผุด ระหว่างรอผลสำรวจและการออกแบบ',
+ refs:[['USACE Sandbag Pamphlet','https://extension.usu.edu/post-wildfire/files/USACE-Sandbag-Pamphlet.pdf','คู่มือกองทัพวิศวกรสหรัฐฯ มีภาพการก่อวงกระสอบทรายรอบจุดน้ำผุด (PDF)'],['Tideflex valves vs flap valves','https://measurit.odoo.com/blog/tideflex-checkmate-valve-benefits-3/tideflex-valves-vs-flap-valves-5','เปรียบเทียบวาล์วกันน้ำย้อนแบบบานพับกับแบบยาง (Duckbill) ที่ปากท่อระบายลงแม่น้ำ']],fit:'ทำทันทีในทุกช่วงที่พบน้ำผุด ระหว่างรอผลสำรวจและการออกแบบ',
  groups:['boil','urgent'],crack:'open',
  paths:[f(U1,'boil',.7,.6),f(U2,'boil',.6,.6),f(SEAM.concat([[0.15,0.02]]),'drain',.6),f(WALL.concat([[0.15,0.02]]),'drain',.7,.7),f([[0.15,0.03,Z],[0.15,0.03,-3.3]],'drain',1.2,.9)],
  labels:[['วงกระสอบทราย (Ring dike)',[1.5,0.45,3.3]],['รางระบายชั่วคราว',[0.15,0.1,0.5]],['วาล์วกันน้ำย้อน',[-2.7,0.45,-2]],['เครื่องสูบน้ำ',[0.15,0.55,-3.6]]],
@@ -211,7 +211,7 @@ const M=[
  stepsTitle:'ขั้นตอนหลัก',
  steps:['สกัดเปิดรอยร้าว อุดจุดน้ำไหลแรงด้วยปูนอุดน้ำรั่วแห้งเร็ว (Hydraulic cement)','เจาะรูเอียงประมาณ 45° สลับซ้ายขวา ให้ตัดผ่านรอยร้าวกลางความหนากำแพง แล้วติดตั้งหัวอัดฉีด (Packer)','อัดพียูจากหัวต่ำสุดขึ้นไป จนวัสดุไหลออกที่หัวถัดไป รอยร้าวโครงสร้างที่แห้งแล้วใช้อีพ็อกซี่แทน','ถอดหัวอัดฉีด อุดรู แล้วฉาบกันซึมชนิดซีเมนต์หรือชนิดตกผลึกด้านใน'],
  cost:'600–1,500',cu:'บาท/ม.',unit:'ถ้าซ่อมเฉพาะจุด ค่าใช้จ่ายลดลงตามสัดส่วน',extra:'ต้องซ่อมซ้ำเป็นระยะ',
- refs:[['Packers and couplers help Nitofill PU stop every leak (Fosroc)','https://fosroc.com.au/news/packers-and-couplers-help-nitofill-pu-stop-every-leak','ภาพหัวอัดฉีดที่ติดตั้งตามแนวรอยร้าว และการอัดพียูหยุดน้ำรั่ว'],['Nitofill Injection Packers TDS (Fosroc)','https://prod.fosroc.com.au/sites/default/files/products_file_storage/Fosroc_Nitofill_Injection_Packers_TDS.pdf','เอกสารข้อมูลหัวอัดฉีดแบบต่างๆ (PDF)'],['Crack injection hardware for basements (Adheseal)','https://adheseal.com.au/collections/crack-injection-hardware/basements','แคตตาล็อกหัวอัดฉีด ปืนอัด และพียู พร้อมภาพสินค้า'],['Hydraulic Cement (Rust-Oleum Concrete Saver)','https://www.rustoleum.com/product-catalog/industrial-brands/concrete-saver-pro/rebuild/hydraulic-cement','ตัวอย่างปูนอุดน้ำรั่วแห้งเร็ว']],fit:'น้ำซึมผ่านตัวกำแพงอย่างเดียว ไม่มีน้ำผุดจากดิน ในกรณีนี้ใช้เสริมเฉพาะจุดร่วมกับวิธีอื่น',
+ refs:[['Packers and couplers help Nitofill PU stop every leak (Fosroc)','https://fosroc.com.au/news/packers-and-couplers-help-nitofill-pu-stop-every-leak','ขั้นตอนเจาะรู ติดหัวอัดฉีด และอัดพียูหยุดน้ำรั่วในรอยร้าวคอนกรีต'],['Nitofill Injection Packers TDS (Fosroc)','https://prod.fosroc.com.au/sites/default/files/products_file_storage/Fosroc_Nitofill_Injection_Packers_TDS.pdf','เอกสารข้อมูลหัวอัดฉีดแบบต่างๆ (PDF)'],['Crack injection hardware for basements (Adheseal)','https://adheseal.com.au/collections/crack-injection-hardware/basements','แคตตาล็อกหัวอัดฉีด อุปกรณ์อัด และเรซินพียู/อีพ็อกซี่'],['Hydraulic Cement (Rust-Oleum Concrete Saver)','https://www.rustoleum.com/product-catalog/industrial-brands/concrete-saver-pro/rebuild/hydraulic-cement','ปูนอุดน้ำรั่วแห้งเร็ว แข็งตัวใน 1–3 นาที ใช้อุดจุดน้ำไหล']],fit:'น้ำซึมผ่านตัวกำแพงอย่างเดียว ไม่มีน้ำผุดจากดิน ในกรณีนี้ใช้เสริมเฉพาะจุดร่วมกับวิธีอื่น',
  groups:['boil','ripple','A'],crack:'sealed',
  paths:[f(U1,'boil'),f(U2,'boil',.8),f(SEAM,'boil',.6),f(cutX(WALL,-2.21),'blocked',.7,.7)],
  labels:[['หัวอัดฉีด (Packer) เอียง 45°',[-1.8,1.95,1.5]],['ฉาบกันซึมด้านใน',[-1.85,0.75,-2.5]],['น้ำลอดใต้ฐานยังไหล',[-1.2,-3.4,Z]]],
@@ -222,7 +222,7 @@ const M=[
  stepsTitle:'ขั้นตอนหลัก',
  steps:['ขุดร่องเป็นช่วงสั้นไม่เกินประมาณ 10 ม. ต่อครั้ง กว้าง 0.5 ม. ลึก 0.8–1.2 ม. ไม่ลึกกว่าฐานรากกำแพง','ปูแผ่นใยสังเคราะห์ (Geotextile) รองกรวด วางท่อพรุน HDPE/PVC 4–6 นิ้ว ลาดเอียงไปบ่อพัก','ถมกรวดล้างสะอาด พับแผ่นใยปิดทับ ถมดินและบดอัด','ทำบ่อพักทุก 30–40 ม. และบ่อสูบ 2–3 จุด พร้อมปั๊มลูกลอยและท่อส่งออกที่มีวาล์วกันย้อน'],
  cost:'1,500–3,000',cu:'บาท/ม.',unit:'บวกบ่อสูบพร้อมปั๊มและระบบไฟ จุดละประมาณ 70,000–220,000 บาท',extra:'มีค่าไฟและดูแลปั๊มต่อเนื่องทุกปี',fit:'น้ำซึมปานกลาง ฐานรากยังแข็งแรง มักใช้ร่วมกับ C หรือ D เพื่อเก็บน้ำส่วนที่ยังเล็ดลอด',
- refs:[['French drain (Wikipedia)','https://en.wikipedia.org/wiki/French_drain','หลักการร่องกรวดและท่อพรุน พร้อมภาพหน้าตัด'],['How to build a French drain (HelloGravel)','https://hellogravel.com/guides/how-to-build-a-french-drain/','ขั้นตอนขุดร่อง ปูผ้าใยสังเคราะห์ วางท่อ และถมกรวด พร้อมภาพ'],['Solving drainage problems with a French drain (Landscape Management)','https://www.landscapemanagement.net/solving-drainage-problems-with-a-french-drain/','ภาพงานติดตั้งจริงในพื้นที่พักอาศัย']],
+ refs:[['French drain (Wikipedia)','https://en.wikipedia.org/wiki/French_drain','หลักการร่องกรวดและท่อพรุน พร้อมภาพหน้าตัด'],['How to build a French drain (HelloGravel)','https://hellogravel.com/guides/how-to-build-a-french-drain/','ขั้นตอนขุดร่อง ความลาด ปูผ้าใยสังเคราะห์ วางท่อพรุน และถมกรวด'],['Solving drainage problems with a French drain (Landscape Management)','https://www.landscapemanagement.net/solving-drainage-problems-with-a-french-drain/','4 ขั้นตอนติดตั้ง พร้อมภาพประกอบแต่ละขั้น']],
  groups:['B'],crack:'open',
  paths:[f(U1.slice(0,4).concat([[0.3,-1.6],[0.9,-0.95]]),'drain'),f([[-7.6,-2],[-5,-4.3],[-2,-4.7],[0.2,-3.4],[0.85,-1.9],[0.92,-1.0]],'drain',.8),f([[-3.3,-0.75],[-2.6,-1.05],[-1.4,-0.95],[0.2,-0.95],[0.65,-0.9]],'drain',.6),f(WALL,'pass',.7,.7),
    f([[0.9,-0.9,Z],[0.9,-0.9,-3]],'pass',1.4,.9),f([[0.9,-0.9,-3],[0.9,0.35,-3],[-1,0.35,-3],[-2,2.65,-3],[-2.6,2.65,-3],[-3,1,-3]],'drain',.9,.9)],
@@ -234,7 +234,7 @@ const M=[
  stepsTitle:'ขั้นตอนหลัก',
  steps:['สำรวจสาธารณูปโภคใต้ดินและแนวฐานรากเดิม เตรียมทางเข้าเครื่องจักร','ตอกด้วยเครื่องสั่น (Vibro hammer) ต่อเนื่องเป็นแนวเดียว ลึก 6–9 ม. ตามผลเจาะดิน','อุดรอยต่อเข็มพืด แล้วทำคานหัวเข็มคอนกรีตยึดกับกำแพงเดิม','เข็มพืดเหล็กถาวรต้องเคลือบกันสนิม หรือเลือกชนิดคอนกรีตอัดแรงหรือไวนิล'],
  cost:'12,000–25,000',cu:'บาท/ม.',unit:'เข็มพืดคอนกรีตอัดแรงหรือไวนิล',extra:'เหล็กถาวร 32,000–65,000 บาท/ม.',
- refs:[['ชีทไพล์เหล็ก SYS (OneStockHome)','https://www.onestockhome.com/th/product_categories/sheet-pile','ผู้จำหน่ายในไทย มีภาพและตารางราคาเข็มพืดเหล็ก'],['Synthetic (vinyl) sheet piling (Everlast Seawalls)','https://everlastseawalls.com/geotechnical-applications-using-synthetic-sheet-piling/','ภาพเข็มพืดไวนิลที่ใช้เป็นม่านกันซึมในคันกั้นน้ำ'],['Construction of thin anti-seepage cut-off walls (Vulcanhammer)','https://vulcanhammer.info/2026/07/24/construction-of-thin-anti-seepage-cut-off-walls/','บทความเทคนิคการทำม่านกันซึมแบบบาง']],fit:'น้ำซึมมาก หรือเริ่มมีการพาดินออกแล้ว ต้องมีแบบที่วิศวกรรับรอง และอาจต้องขออนุญาตถ้าทำฝั่งคลอง',
+ refs:[['ชีทไพล์เหล็ก SYS (OneStockHome)','https://www.onestockhome.com/th/product_categories/sheet-pile','ผู้จำหน่ายในไทย มีภาพและตารางราคาเข็มพืดเหล็ก'],['Synthetic (vinyl) sheet piling (Everlast Seawalls)','https://everlastseawalls.com/geotechnical-applications-using-synthetic-sheet-piling/','เข็มพืดไวนิลที่ใช้เป็นม่านกันซึมหยุด Piping ในงานซ่อมคันกั้นน้ำ'],['Construction of thin anti-seepage cut-off walls (Vulcanhammer)','https://vulcanhammer.info/2026/07/24/construction-of-thin-anti-seepage-cut-off-walls/','การทำม่านกันซึมแบบบางด้วยการสั่นเข็มพืดลงดินแล้วเติมสารละลายแข็งตัว พร้อมตัวอย่างโครงการ']],fit:'น้ำซึมมาก หรือเริ่มมีการพาดินออกแล้ว ต้องมีแบบที่วิศวกรรับรอง และอาจต้องขออนุญาตถ้าทำฝั่งคลอง',
  groups:['C'],crack:'open',
  paths:[f(cutX(U1,-1.46),'blocked'),f(cutX(U2,-1.46),'blocked',.8),f(cutX(SEAM,-1.46),'blocked',.6),f(TIP,'fade',.35,.35),f(WALL,'pass',.7,.7)],
  labels:[['เข็มพืด ลึก 6–9 ม. ถึงชั้นดินเหนียว',[-1.3,-4.2,Z]],['คานหัวเข็ม (Capping beam)',[-1.3,0.4,1.5]],['ซึมเล็กน้อยใต้ปลายเข็ม',[0.4,-6.4,Z]]],
@@ -245,7 +245,7 @@ const M=[
  stepsTitle:'ขั้นตอนหลัก',
  steps:['เจาะนำ แล้วอัดฉีดน้ำปูนแรงดันสูงเป็นเสาดินซีเมนต์ Ø 0.6–0.8 ม.','จัดระยะให้เสาซ้อนทับกันเป็นผนังต่อเนื่อง ลึกประมาณ 6–9 ม. ชิดแนวกำแพงด้านใน','เก็บตัวอย่างเสาทดสอบกำลังอัดและการซึมผ่านน้ำ','จัดการน้ำโคลนจากการอัดฉีด และคืนสภาพผิวดิน'],
  cost:'21,000–35,000',cu:'บาท/ม.',unit:'อิงราคากลางกรมชลประทาน 2569',extra:'ผู้รับเหมาเอกชนงานเล็กมักสูงกว่า',
- refs:[['Jet grouting brochure (Keller UK)','https://keller-ge.co.uk/sites/keller-uk/files/2019-03/jet-grouting-brochure-keller-uk.pdf','ภาพเครื่องจักร เสาดินซีเมนต์ที่ขุดเปิดออกมา และการจัดเรียงเป็นผนัง (PDF)'],['Jet grouting brochure (Keller North America)','https://www.keller-na.com/sites/keller-na/files/2023-09/keller-jet-grouting-brochure.pdf','ระบบ Single / Double / Triple fluid และงานตัวอย่าง (PDF)'],['Dams and levees brochure (Keller)','https://www.keller-na.com/sites/keller-na/files/2020-09/keller-dams-levees-brochure.pdf','การทำม่านกันซึมใต้คันกั้นน้ำด้วยวิธีต่างๆ (PDF)'],['Pressure grouting (Wikipedia)','https://en.wikipedia.org/wiki/Jet_grouting','ภาพรวมการอัดฉีดแรงดันสูงในงานปรับปรุงดิน']],fit:'พื้นที่แคบ เครื่องจักรใหญ่เข้าไม่ได้ หรือไม่ต้องการแรงสั่นกระทบบ้านที่อยู่ชิดแนวกำแพง',
+ refs:[['Jet grouting brochure (Keller UK)','https://www.keller.co.uk/sites/keller-uk/files/2019-03/jet-grouting-brochure-keller-uk.pdf','หลักการ Soilcrete การฉีดตัดดินผสมซีเมนต์เป็นเสาและผนังทึบน้ำ (PDF)'],['Jet grouting brochure (Keller North America)','https://www.keller-na.com/sites/keller-na/files/2023-09/keller-jet-grouting-brochure.pdf','การใช้งาน เครื่องจักร และการควบคุมคุณภาพงาน Jet grouting (PDF)'],['Dams and levees brochure (Keller)','https://www.keller-na.com/sites/keller-na/files/2020-09/keller-dams-levees-brochure.pdf','ม่านกันซึมใต้เขื่อนและคันกั้นน้ำ: Deep soil mixing, Jet grouting, Slurry wall (PDF)']],fit:'พื้นที่แคบ เครื่องจักรใหญ่เข้าไม่ได้ หรือไม่ต้องการแรงสั่นกระทบบ้านที่อยู่ชิดแนวกำแพง',
  groups:['D'],crack:'open',
  paths:[f(cutX(U1,-1.57),'blocked'),f(cutX(U2,-1.57),'blocked',.8),f(cutX(SEAM,-1.57),'blocked',.6),f(TIP,'fade',.3,.35),f(WALL,'pass',.7,.7)],
  labels:[['เสาดินซีเมนต์ Ø0.6–0.8 ม. ซ้อนทับกัน',[-1.2,-4.2,Z]],['ลึก 6–9 ม.',[-1.2,-7.1,2]]],
@@ -256,7 +256,7 @@ const M=[
  stepsTitle:'ขั้นตอนหลัก',
  steps:['รื้อกำแพงเดิมทีละช่วง ทำรั้วชั่วคราวเพื่อความปลอดภัย','ตอกเสาเข็มคอนกรีต ทำฐานรากและผนัง คสล. สูงประมาณ 2.0–2.5 ม.','ติดแผ่นกันซึม (Waterstop) ที่รอยต่อ และทำชั้นกันซึมด้านคลอง','ทำช่องระบายแรงดันน้ำ (Weep hole) และระบบระบายหลังกำแพง'],
  cost:'25,000–50,000',cu:'บาท/ม.',unit:'รวมเสาเข็ม',extra:'ค่าดูแลระยะยาวต่ำ',
- refs:[['Sika Waterbar (Sika)','https://sgp.sika.com/en/construction/waterproofing/joints-waterproofing/sika-waterbar-o-dwallvn.html','ตัวอย่างแผ่นกันซึม PVC ที่ฝังในรอยต่อคอนกรีต พร้อมภาพ'],['Polybit Polystop PVC waterstop TDS (Henkel)','https://datasheets.tdx.henkel.com/POLYBIT-Polystop-en_AE.pdf','รูปแบบหน้าตัด Waterstop และวิธีติดตั้ง (PDF)'],['Nippon PVC Waterstop TDS','https://professional.nipponpaint.com.my/downloads/tds-nippon-pvc-waterstop-2017-07.pdf','ขนาดและการต่อแผ่นกันซึม (PDF)']],fit:'ช่วงที่กำแพงเดิมเสียหายแล้ว หรือต้องการยกระดับป้องกันน้ำท่วมระยะยาว',
+ refs:[['Sika Waterbar (Sika)','https://sgp.sika.com/en/construction/waterproofing/joints-waterproofing/sika-waterbar-o-dwallvn.html','แผ่นกันซึม PVC สำหรับรอยต่อขยายตัวของงานคอนกรีตกักเก็บน้ำและชั้นใต้ดิน'],['Polybit Polystop PVC waterstop TDS (Henkel)','https://datasheets.tdx.henkel.com/POLYBIT-Polystop-en_AE.pdf','รูปแบบหน้าตัด Waterstop และวิธีติดตั้ง (PDF)'],['Nippon PVC Waterstop TDS','https://professional.nipponpaint.com.my/downloads/tds-nippon-pvc-waterstop-2017-07.pdf','ขนาดและการต่อแผ่นกันซึม (PDF)']],fit:'ช่วงที่กำแพงเดิมเสียหายแล้ว หรือต้องการยกระดับป้องกันน้ำท่วมระยะยาว',
  groups:['E'],crack:'none',hideOld:true,
  paths:[f(U1,'boil',.45,.6),f(U2,'boil',.35,.6),f(cutX([[-3.3,-0.9],[-2.9,-1.0],[-1.4,-1.0]],-2.9),'blocked',.6),f(cutX(WALL,-2.32),'blocked',.7,.7)],
  labels:[['ผนัง คสล. ใหม่ + Waterstop',[-2.1,2.85,1]],['ฐานรากบนเสาเข็ม',[-2.1,-0.95,Z]],['ช่องระบายแรงดัน (Weep hole)',[-1.9,0.75,-1]]],
@@ -266,19 +266,15 @@ const M=[
 const GD={
  em1901:['USACE EM 1110-2-1901','Seepage Analysis and Control for Dams','https://prod.damtoolbox.org/images/7/7a/EM1110-2-1901.pdf','การวิเคราะห์น้ำซึม และเกณฑ์ชั้นกรองป้องกันดินถูกพาออก (Piping) (PDF)'],
  em1913:['USACE EM 1110-2-1913','Design and Construction of Levees','https://apps.dtic.mil/sti/pdfs/ADA402946.pdf','การควบคุมน้ำลอดใต้คันกั้นน้ำ ร่องระบาย และบ่อลดแรงดัน (PDF)'],
- ced:['Cedergren','Seepage, Drainage, and Flow Nets (3rd ed., Wiley)','https://gov.wiley.com/WileyCDA/WileyTitle/productCd-047118053X.html','ตำราการออกแบบชั้นกรองและระบบระบายน้ำใต้ดิน (หนังสือ)'],
+ ced:['Cedergren','Seepage, Drainage, and Flow Nets (3rd ed., Wiley)','https://gov.wiley.com/WileyCDA/WileyTitle/productCd-047118053X.html','ตำราการออกแบบชั้นกรองและระบบระบายน้ำใต้ดิน (หนังสือ ต้องซื้อ)'],
  ffh:['USACE','Flood-Fight Handbook (Walla Walla District, 2015)','https://juneau.org/wp-content/uploads/2024/10/USACE-Flood-Fight-Handbook.pdf','การล้อมกระสอบทรายรอบจุดน้ำผุด และการเฝ้าระวังช่วงน้ำสูง (PDF)'],
- aci224:['ACI 224.1R','Causes, Evaluation, and Repair of Cracks in Concrete Structures','https://www.concrete.org/publications/internationalconcreteabstractsportal/m/details/id/18555','สาเหตุ การประเมิน และการซ่อมรอยร้าว รวมถึงการอัดฉีดอีพ็อกซี่และพียู'],
- aci546:['ACI 546R','Guide to Concrete Repair','https://concrete.org/Portals/0/Files/PDF/Previews/546R_14_PREVIEW.pdf','การเตรียมผิว การเลือกวัสดุ และวิธีซ่อมคอนกรีต (หน้าตัวอย่าง PDF)'],
- aph:['ArcelorMittal','Piling Handbook, 9th ed. (2022)','https://palplanches.arcelormittal.com/wp-content/uploads/2022/05/AMCRPS_Piling_Handbook_9th_Revision_2022_web.pdf','การเลือกหน้าตัด วิธีตอก การอุดรอยต่อ และการป้องกันสนิมเข็มพืด (PDF)'],
- en12063:['EN 12063','Execution of special geotechnical work: Sheet pile walls','https://knowledge.bsigroup.com/products/execution-of-special-geotechnical-work-sheet-pile-walls-combined-pile-walls-high-modulus-walls','เกณฑ์ความคลาดเคลื่อนและการบันทึกการตอกเข็มพืด (ต้องซื้อ)'],
- gec12:['FHWA GEC 12','Ground Modification Methods Reference Manual, Vol. I','https://rosap.ntl.bts.gov/view/dot/40552','วิธีปรับปรุงดินรวมถึง Jet grouting การออกแบบและควบคุมคุณภาพ'],
- en12716:['EN 12716','Execution of special geotechnical work: Jet grouting','https://shop-checkout.bsigroup.com/products/execution-of-special-geotechnical-work-jet-grouting','การทดสอบเสาดินซีเมนต์และการควบคุมงานอัดฉีด (ต้องซื้อ)'],
- tis1390:['มอก. 1390-2566','เข็มพืดเหล็กรีดร้อน (สมอ.)','https://service.tisi.go.th/fulltext/TIS1390-2566.pdf','มาตรฐานผลิตภัณฑ์ที่ใช้ตรวจรับเข็มพืดเหล็ก (PDF)'],
- dpt:['กรมโยธาธิการฯ','แบบงานเขื่อนป้องกันตลิ่ง','https://www.yotathai.com/yotanews/river-bank-protection','แบบมาตรฐานงานป้องกันตลิ่งริมน้ำของกรมโยธาธิการและผังเมือง'],
+ aph:['ArcelorMittal','Piling Handbook, 9th ed. (2022)','https://projects.arcelormittal.com/foundations/resources/documentation/piling-handbook/','คู่มือฉบับเต็มดาวน์โหลดได้ฟรี: หน้าตัด วิธีตอก การอุดรอยต่อ และการป้องกันสนิม'],
+ en12716:['EN 12716','Execution of special geotechnical work: Jet grouting','https://shop-checkout.bsigroup.com/products/execution-of-special-geotechnical-work-jet-grouting','ขอบเขตมาตรฐาน: การผสมดินซีเมนต์ การทดสอบ และการควบคุมงาน (ฉบับเต็มต้องซื้อ)'],
+ tis1390:['มอก. 1390-2566','เข็มพืดเหล็กรีดร้อน (สมอ.)','https://service.tisi.go.th/fulltext/TIS1390-2566.pdf','หน้าตัด เกรดเหล็ก เกณฑ์ความคลาดเคลื่อน และการทดสอบ ใช้ตรวจรับเข็มพืดเหล็ก (PDF)'],
+ dpt:['กรมโยธาธิการฯ','แบบงานเขื่อนป้องกันตลิ่ง','https://www.yotathai.com/yotanews/river-bank-protection','เอกสาร 17 หน้าเรื่องการเขียนแบบเขื่อนป้องกันตลิ่ง จัดทำโดยกรมโยธาธิการและผังเมือง (PDF)'],
  bca:['พ.ร.บ.ควบคุมอาคาร 2522','รั้วและกำแพงตามกฎหมายควบคุมอาคาร','https://www.nakhoncity.org/law/pdf/law060268.pdf','รั้วหรือกำแพงที่ติดที่สาธารณะถือเป็นอาคาร ต้องขออนุญาตก่อสร้าง (PDF)']
 };
-const GL={problem:['em1901','em1913','ced'],urgent:['ffh','em1913'],A:['aci224','aci546'],B:['em1913','em1901','ced'],C:['aph','en12063','tis1390'],D:['gec12','en12716'],E:['aci546','dpt','bca']};
+const GL={problem:['em1901','em1913','ced'],urgent:['ffh','em1913'],A:[],B:['em1913','em1901','ced'],C:['aph','tis1390'],D:['en12716'],E:['dpt','bca']};
 const BASE_LABELS=[['คลอง',[-6.5,1.3,1.5]],['พื้นที่ด้านใน',[5.8,2.9,-1]],['ชั้นดินที่น้ำซึมผ่านได้',[4.6,-3.2,Z]],['ชั้นดินเหนียวทึบน้ำ',[4.6,-7.1,Z]]];
 
 /* ---------- three.js scene ---------- */
@@ -418,13 +414,13 @@ function renderPanel(m){
  (m.fit?'<div class="fit"><b>เหมาะกับ</b> '+esc(m.fit)+'</div>':'')+'</div><div class="pcol">'+
  '<div class="sec"><h3>'+esc(m.stepsTitle)+'</h3><ol>'+m.steps.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol></div>'+
  '<div class="cost"><h3 style="margin:0;font:600 12px/1.2 var(--f-body);letter-spacing:.06em;color:var(--muted)">ค่าใช้จ่ายโดยประมาณ</h3><div class="big">'+m.cost+'<small>'+m.cu+'</small></div><div class="sub">'+esc(m.unit)+(m.extra?' · '+esc(m.extra):'')+'</div></div></div>'+
- '<div class="pcol"><div class="sec"><h3>มาตรฐานและคู่มืออ้างอิง</h3>'+glList(GL[m.id])+'</div>'+
+ '<div class="pcol">'+(GL[m.id].length?'<div class="sec"><h3>มาตรฐานและคู่มืออ้างอิง</h3>'+glList(GL[m.id])+'</div>':'')+
  '<div class="sec"><h3>ดูวัสดุและภาพงานจริง</h3>'+refList(m.refs)+'</div></div>';
 }
 function refList(r){return '<ul class="rlist">'+r.map(([t,u,n])=>'<li><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>').join('')+'</ul>'}
 function glList(r){return '<ul class="rlist">'+r.map(k=>{const[c,t,u,n]=GD[k];return '<li><span class="cd">'+esc(c)+'</span><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>'}).join('')+'</ul>'}
 document.getElementById('rgrid').innerHTML=M.map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+refList(m.refs)+'</div>').join('');
-document.getElementById('ggrid').innerHTML=M.map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+glList(GL[m.id])+'</div>').join('')+
+document.getElementById('ggrid').innerHTML=M.filter(m=>GL[m.id].length).map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+glList(GL[m.id])+'</div>').join('')+
  '<div><h3><span class="k">TH</span>กฎหมายและมาตรฐานไทย</h3>'+glList(['tis1390','dpt','bca'])+'</div>';
 function select(i,instant){cur=i;const m=M[i];
  [...tabs.children].forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
