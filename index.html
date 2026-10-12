@@ -103,6 +103,7 @@ ol{margin:0;padding-left:1.3em;display:grid;gap:6px;font-size:14px}
 .rlist a:hover{text-decoration:underline}
 .rlist a::after{content:" ↗";font-size:12px}
 .rlist .cd{display:inline-block;font-family:var(--f-mono);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:1px 5px;margin-right:6px;vertical-align:1px}
+.rlist .cd.case{color:var(--accent);border-color:var(--accent)}
 .rlist .rn{display:block;font-size:12.5px;color:var(--muted);line-height:1.4}
 .rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px 24px}
 .rgrid > div{display:grid;gap:8px;align-content:start;min-width:0}
@@ -153,8 +154,8 @@ ol{margin:0;padding-left:1.3em;display:grid;gap:6px;font-size:14px}
   </section>
 
   <section class="costs refs">
-    <h2>มาตรฐานและคู่มือที่ใช้อ้างอิงขั้นตอนการทำงาน</h2>
-    <p class="foot">ใช้ประกอบการกำหนดวิธีทำงาน การตรวจรับ และการเขียน TOR ตรวจลิงก์ทุกรายการแล้วเมื่อ 12 ต.ค. 2569 มาตรฐาน ACI 224.1R, ACI 546R และ EN 12063 ไม่ได้ใส่ลิงก์ไว้ เพราะเปิดอ่านได้แค่บทคัดย่อหรือหน้าขายเท่านั้น</p>
+    <h2>มาตรฐาน คู่มือ และกรณีศึกษา</h2>
+    <p class="foot">มาตรฐานและคู่มือใช้ประกอบการกำหนดวิธีทำงาน การตรวจรับ และการเขียน TOR ส่วนกรณีศึกษาเป็นรายงานวิจัยและบทความวิชาการที่บันทึกพฤติกรรมจริงของน้ำซึมและผลของวิธีแก้ ตรวจลิงก์ทุกรายการแล้วเมื่อ 12 ต.ค. 2569 มาตรฐาน ACI 224.1R, ACI 546R และ EN 12063 ไม่ได้ใส่ลิงก์ไว้ เพราะเปิดอ่านได้แค่บทคัดย่อหรือหน้าขายเท่านั้น</p>
     <div class="rgrid" id="ggrid"></div>
   </section>
 
@@ -270,11 +271,23 @@ const GD={
  ffh:['USACE','Flood-Fight Handbook (Walla Walla District, 2015)','https://juneau.org/wp-content/uploads/2024/10/USACE-Flood-Fight-Handbook.pdf','การล้อมกระสอบทรายรอบจุดน้ำผุด และการเฝ้าระวังช่วงน้ำสูง (PDF)'],
  aph:['ArcelorMittal','Piling Handbook, 9th ed. (2022)','https://projects.arcelormittal.com/foundations/resources/documentation/piling-handbook/','คู่มือฉบับเต็มดาวน์โหลดได้ฟรี: หน้าตัด วิธีตอก การอุดรอยต่อ และการป้องกันสนิม'],
  en12716:['EN 12716','Execution of special geotechnical work: Jet grouting','https://shop-checkout.bsigroup.com/products/execution-of-special-geotechnical-work-jet-grouting','ขอบเขตมาตรฐาน: การผสมดินซีเมนต์ การทดสอบ และการควบคุมงาน (ฉบับเต็มต้องซื้อ)'],
+ fema1032:['FEMA P-1032','Evaluation and Monitoring of Seepage and Internal Erosion (2015)','https://damtoolbox.org/images/b/bd/Evaluation_and_Monitoring_of_Seepage_and_Internal_Erosion_Document.pdf','กลไก Internal erosion และ Backward erosion piping การเฝ้าระวัง และการตอบสนองฉุกเฉิน (PDF)'],
+ fema484:['FEMA','Filters for Embankment Dams: Best Practices for Design and Construction (2011)','https://fema.gov/sites/default/files/2020-08/filters_embankment_dams_update.pdf','เกณฑ์ออกแบบชั้นกรอง การใช้ Geotextile ในระบบระบาย และ Toe drain (PDF)'],
+ em2504:['USACE EM 1110-2-2504','Design of Sheet Pile Walls (1994)','https://apps.dtic.mil/sti/pdfs/ADA402989.pdf','การออกแบบกำแพงเข็มพืด รวมถึงผลของน้ำซึมใต้ปลายเข็มต่อแรงดันน้ำ (PDF)'],
+ em2102:['USACE EM 1110-2-2102','Waterstops and Other Preformed Joint Materials for Civil Works Structures','https://apps.dtic.mil/sti/pdfs/ADA402911.pdf','ชนิด การเลือกใช้ และการติดตั้งแผ่นกันซึมในรอยต่อโครงสร้างชลศาสตร์ (PDF)'],
+ po2021:['QJEGH 2021','Field measurements on a large natural sand boil along the river Po (Italy)','https://cris.unibo.it/bitstream/11585/818346/4/qjegh2020-097.full.pdf','Marchi และคณะ วัดแรงดัน อัตราไหล และตะกอนของจุดน้ำผุดจริงระหว่างน้ำท่วมปี 2018 เทียบกับแบบจำลอง (PDF)',1],
+ erdc2020:['ERDC TR-20-19','Study of Sand Boil Development at Kaskaskia Island, IL (2020)','https://apps.dtic.mil/sti/pdfs/AD1107939.pdf','การเกิดจุดน้ำผุดหลังคันกั้นแม่น้ำมิสซิสซิปปี และผลของ Seepage berm กับ Relief well (PDF)',1],
+ iwall:['J. Geotech. Geoenviron. Eng. 2008','Stability of I-Walls in New Orleans during Hurricane Katrina','https://www.rocscience.com/assets/resources/learning/papers/Stability-of-I-Walls-in-New-Orleans-During-Hurricane-Katrina.pdf','Duncan และคณะ วิเคราะห์การพังของกำแพงกันน้ำริมคลอง 17th Street และ London Avenue จากแรงดันน้ำใต้ฐานในชั้นทราย (PDF)',1],
+ usbr2398:['USBR Research','Underwater Cure Polymeric Repairs to Seal Seepage Cracks','https://www.usbr.gov/research/projects/detail.cfm?id=2398','ทดสอบพียูชนิดชอบน้ำอุดรอยร้าวที่มีน้ำซึม ทั้งในห้องทดลองและภาคสนามที่คลองส่งน้ำ CAP รัฐแอริโซนา ปี 2016',1],
+ laronge:['GeoStJohns 2019','Preliminary Design for Seepage Remediation at a Small, Remote Dam: Lac La Ronge Dam','https://members.cgs.ca/conferences/GeoStJohns2019/papers/Geo2019Paper282.pdf','Kozun และคณะ ออกแบบแก้น้ำซึมด้วยเข็มพืดร่วมกับม่านอัดฉีด และเทียบกับทางเลือกแผ่นกันซึมด้านท้ายน้ำ (PDF)',1],
+ sph2024:['Frontiers in Earth Science 2024','Numerical simulation of cut-off walls by high-pressure jet grouting based on SPH','https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1491583/full','Liu และคณะ จำลองการสร้างม่านกันซึมด้วย Jet grouting และเทียบกับผลทดสอบภาคสนามในมณฑลเจียงซี',1],
+ ucdavis:['UC Davis GPA','Jet Grouting (Geotechnical Professional Activities)','https://research.engineering.ucdavis.edu/gpa/ground-improvement/jet-grouting/','กลไก ระบบท่อคู่และสามท่อ และกรณีศึกษาคันกั้นน้ำ Stockton ปี 1999',1],
+ thai2011:['วิศวกรรมสาร มก.','ความเสี่ยงเชิงวิศวกรรมและเศรษฐศาสตร์ของกำแพงป้องกันน้ำท่วมที่ก่อสร้างหลังปี พ.ศ. 2554','https://ph01.tci-thaijo.org/index.php/kuengj/article/download/146039/107730/390282','อานุภาพภราดร และ ศรลัมพ์ วิเคราะห์ความเสี่ยงและต้นทุนตลอดอายุของ I-wall และคันดินในไทย (PDF)',1],
  tis1390:['มอก. 1390-2566','เข็มพืดเหล็กรีดร้อน (สมอ.)','https://service.tisi.go.th/fulltext/TIS1390-2566.pdf','หน้าตัด เกรดเหล็ก เกณฑ์ความคลาดเคลื่อน และการทดสอบ ใช้ตรวจรับเข็มพืดเหล็ก (PDF)'],
  dpt:['กรมโยธาธิการฯ','แบบงานเขื่อนป้องกันตลิ่ง','https://www.yotathai.com/yotanews/river-bank-protection','เอกสาร 17 หน้าเรื่องการเขียนแบบเขื่อนป้องกันตลิ่ง จัดทำโดยกรมโยธาธิการและผังเมือง (PDF)'],
  bca:['พ.ร.บ.ควบคุมอาคาร 2522','รั้วและกำแพงตามกฎหมายควบคุมอาคาร','https://www.nakhoncity.org/law/pdf/law060268.pdf','รั้วหรือกำแพงที่ติดที่สาธารณะถือเป็นอาคาร ต้องขออนุญาตก่อสร้าง (PDF)']
 };
-const GL={problem:['em1901','em1913','ced'],urgent:['ffh','em1913'],A:[],B:['em1913','em1901','ced'],C:['aph','tis1390'],D:['en12716'],E:['dpt','bca']};
+const GL={problem:['fema1032','em1901','em1913','po2021','erdc2020','iwall'],urgent:['ffh','fema1032','em1913'],A:['usbr2398'],B:['em1913','fema484','em1901','ced','erdc2020'],C:['aph','em2504','tis1390','laronge'],D:['en12716','sph2024','ucdavis','laronge'],E:['em2102','iwall','thai2011','dpt','bca']};
 const BASE_LABELS=[['คลอง',[-6.5,1.3,1.5]],['พื้นที่ด้านใน',[5.8,2.9,-1]],['ชั้นดินที่น้ำซึมผ่านได้',[4.6,-3.2,Z]],['ชั้นดินเหนียวทึบน้ำ',[4.6,-7.1,Z]]];
 
 /* ---------- three.js scene ---------- */
@@ -414,11 +427,11 @@ function renderPanel(m){
  (m.fit?'<div class="fit"><b>เหมาะกับ</b> '+esc(m.fit)+'</div>':'')+'</div><div class="pcol">'+
  '<div class="sec"><h3>'+esc(m.stepsTitle)+'</h3><ol>'+m.steps.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol></div>'+
  '<div class="cost"><h3 style="margin:0;font:600 12px/1.2 var(--f-body);letter-spacing:.06em;color:var(--muted)">ค่าใช้จ่ายโดยประมาณ</h3><div class="big">'+m.cost+'<small>'+m.cu+'</small></div><div class="sub">'+esc(m.unit)+(m.extra?' · '+esc(m.extra):'')+'</div></div></div>'+
- '<div class="pcol">'+(GL[m.id].length?'<div class="sec"><h3>มาตรฐานและคู่มืออ้างอิง</h3>'+glList(GL[m.id])+'</div>':'')+
+ '<div class="pcol">'+(GL[m.id].length?'<div class="sec"><h3>มาตรฐาน คู่มือ และกรณีศึกษา</h3>'+glList(GL[m.id])+'</div>':'')+
  '<div class="sec"><h3>ดูวัสดุและภาพงานจริง</h3>'+refList(m.refs)+'</div></div>';
 }
 function refList(r){return '<ul class="rlist">'+r.map(([t,u,n])=>'<li><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>').join('')+'</ul>'}
-function glList(r){return '<ul class="rlist">'+r.map(k=>{const[c,t,u,n]=GD[k];return '<li><span class="cd">'+esc(c)+'</span><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>'}).join('')+'</ul>'}
+function glList(r){return '<ul class="rlist">'+r.map(k=>{const[c,t,u,n,cs]=GD[k];return '<li><span class="cd'+(cs?' case':'')+'">'+(cs?'กรณีศึกษา · ':'')+esc(c)+'</span><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>'}).join('')+'</ul>'}
 document.getElementById('rgrid').innerHTML=M.map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+refList(m.refs)+'</div>').join('');
 document.getElementById('ggrid').innerHTML=M.filter(m=>GL[m.id].length).map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+glList(GL[m.id])+'</div>').join('')+
  '<div><h3><span class="k">TH</span>กฎหมายและมาตรฐานไทย</h3>'+glList(['tis1390','dpt','bca'])+'</div>';
