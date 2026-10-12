@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="ภาพตัดขวาง 3D อธิบายวิธีซ่อมกำแพงริมคลองที่มีน้ำซึมผ่านและน้ำลอดใต้ฐานราก พร้อมขั้นตอน ราคาต่อเมตร มาตรฐานอ้างอิง และตัวอย่างวัสดุ">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>ทางเลือกซ่อมกำแพงริมคลอง</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: engineering section sheet — 3D section on the left, method sheet on the right, cost scale below */
+:root{
+  --bg:#f1f3ef; --surface:#ffffff; --ink:#1c2420; --muted:#5b6862; --line:#d5dbd5;
+  --accent:#0d6c8c; --accent-soft:#dcedf2; --stage:#e6eae4;
+  --flow:#b8452c; --flow-bg:#f8e3dd; --managed:#9a6512; --managed-bg:#f6ebd3; --stopped:#2c7a50; --stopped-bg:#dcefe3;
+  --f-display:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111613; --surface:#18201c; --ink:#e4eae6; --muted:#97a69e; --line:#2a3530;
+  --accent:#56b6d3; --accent-soft:#163039; --stage:#141a17;
+  --flow:#ec8a72; --flow-bg:#3a201a; --managed:#e0b062; --managed-bg:#33281a; --stopped:#70c996; --stopped-bg:#173225; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111613; --surface:#18201c; --ink:#e4eae6; --muted:#97a69e; --line:#2a3530;
+  --accent:#56b6d3; --accent-soft:#163039; --stage:#141a17;
+  --flow:#ec8a72; --flow-bg:#3a201a; --managed:#e0b062; --managed-bg:#33281a; --stopped:#70c996; --stopped-bg:#173225; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:20px;padding-block:24px 40px;display:grid;gap:18px}
+header{display:grid;gap:4px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.4vw,36px);line-height:1.15;margin:0;text-wrap:balance}
+.lede{margin:0;color:var(--muted);max-width:70ch}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tab{font:500 14px/1.2 var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tab .k{font-family:var(--f-mono);font-size:12px;color:var(--muted);min-width:1ch}
+.tab:hover{border-color:var(--accent)}
+.tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.tab[aria-pressed="true"] .k{color:var(--surface)}
+.tab:focus-visible,.btn:focus-visible,.crow:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:18px;align-items:start}
+.stage{position:relative;background:var(--stage);border:1px solid var(--line);border-radius:8px;overflow:hidden;height:clamp(380px,66vh,700px);min-width:0}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+.stage canvas:active{cursor:grabbing}
+.labels{position:absolute;inset:0;pointer-events:none}
+.lbl{position:absolute;transform:translate(-50%,-100%);font:500 12px/1.3 var(--f-body);color:var(--ink);background:color-mix(in srgb,var(--surface) 88%,transparent);border:1px solid var(--line);padding:3px 7px;border-radius:4px;white-space:nowrap;margin-top:-6px}
+.lbl.m{border-color:var(--accent);color:var(--accent)}
+.lbl::after{content:"";position:absolute;left:50%;bottom:-7px;width:1px;height:6px;background:var(--muted)}
+.lbl.tick{transform:translate(4px,-50%);background:none;border:none;padding:0;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin:0}
+.lbl.tick::after{display:none}
+.labels.off .lbl:not(.tick){display:none}
+.hud{position:absolute;left:10px;right:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;pointer-events:none}
+.hud > *{pointer-events:auto}
+.ctrl{display:flex;gap:6px;flex-wrap:wrap}
+.btn{font:500 13px/1 var(--f-body);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:8px 10px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.level{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:5px 10px;font-size:13px}
+.level input{width:110px;accent-color:var(--accent)}
+.level output{font-family:var(--f-mono);font-variant-numeric:tabular-nums;min-width:5ch}
+.legend{position:absolute;top:10px;left:10px;font-size:12px;color:var(--muted);background:color-mix(in srgb,var(--surface) 85%,transparent);border:1px solid var(--line);border-radius:5px;padding:6px 9px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:calc(100% - 20px)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#2a95c9;margin-right:5px;vertical-align:-1px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;display:grid;gap:16px;min-width:0}
+.ph{display:grid;gap:2px}
+.code{font-family:var(--f-mono);font-size:12px;color:var(--accent);letter-spacing:.05em}
+.panel h2{font-family:var(--f-display);font-weight:600;font-size:24px;line-height:1.2;margin:0;text-wrap:balance}
+.en{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.panel p{margin:0}
+.sec{display:grid;gap:8px}
+.sec h3{margin:0;font:600 12px/1.2 var(--f-body);letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.frow{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:start}
+.pill{font:600 12px/1 var(--f-body);padding:5px 8px;border-radius:999px;white-space:nowrap}
+.s-flow{background:var(--flow-bg);color:var(--flow)} .s-managed{background:var(--managed-bg);color:var(--managed)} .s-stopped{background:var(--stopped-bg);color:var(--stopped)}
+.frow .what{font-size:13px;color:var(--muted);line-height:1.35}
+.frow .what b{color:var(--ink);font-weight:600;display:block}
+ol{margin:0;padding-left:1.3em;display:grid;gap:6px;font-size:14px}
+.cost{display:grid;gap:2px;border-top:1px solid var(--line);padding-top:14px}
+.big{font-family:var(--f-mono);font-size:28px;font-weight:500;font-variant-numeric:tabular-nums}
+.big small{font-family:var(--f-body);font-size:14px;color:var(--muted);font-weight:400;margin-left:6px}
+.sub{font-size:13px;color:var(--muted)}
+.fit{font-size:14px;background:var(--accent-soft);border-radius:6px;padding:10px 12px}
+.costs{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;display:grid;gap:12px}
+.costs h2{font-family:var(--f-display);font-weight:600;font-size:20px;margin:0}
+.chart{overflow-x:auto}
+.cgrid{min-width:560px;display:grid;gap:4px}
+.crow{display:grid;grid-template-columns:190px 1fr 92px;gap:12px;align-items:center;padding:5px 6px;border-radius:5px;cursor:pointer;border:1px solid transparent;background:none;font:inherit;color:inherit;text-align:left;width:100%}
+.crow:hover{background:var(--bg)}
+.crow.on{border-color:var(--accent);background:var(--accent-soft)}
+.crow .n{font-size:13px}
+.track{position:relative;height:16px}
+.bar{position:absolute;top:3px;height:10px;border-radius:2px;background:var(--accent)}
+.crow.pkg .bar{background:var(--stopped)}
+.crow .v{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums;text-align:right;color:var(--muted)}
+.axis{display:grid;grid-template-columns:190px 1fr 92px;gap:12px;padding:0 6px}
+.axis .t{position:relative;height:18px;border-top:1px solid var(--line)}
+.axis span{position:absolute;top:3px;transform:translateX(-50%);font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.rlist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rlist a{color:var(--accent);text-decoration:none;font-weight:500;font-size:14px}
+.rlist a:hover{text-decoration:underline}
+.rlist a::after{content:" ↗";font-size:12px}
+.rlist .cd{display:inline-block;font-family:var(--f-mono);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:1px 5px;margin-right:6px;vertical-align:1px}
+.rlist .rn{display:block;font-size:12.5px;color:var(--muted);line-height:1.4}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px 24px}
+.rgrid > div{display:grid;gap:8px;align-content:start;min-width:0}
+.rgrid h3{margin:0;font:600 14px/1.3 var(--f-display);color:var(--ink)}
+.rgrid h3 .k{font-family:var(--f-mono);color:var(--accent);margin-right:6px}
+.foot{font-size:12.5px;color:var(--muted);max-width:90ch;margin:0}
+@media (max-width:980px){.main{grid-template-columns:1fr}.stage{height:clamp(340px,58vh,560px)}}
+@media (max-width:520px){.wrap{padding-inline:16px}.level input{width:80px}.legend .hint{display:none}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">น้ำซึมผ่านกำแพงและลอดใต้ฐานราก · Seepage &amp; underseepage repair</div>
+    <h1>ทางเลือกซ่อมกำแพงริมคลอง</h1>
+    <p class="lede">ภาพตัดขวางสามมิติของกำแพงริมคลองช่วงยาว 8 ม. เลือกวิธีด้านล่างเพื่อดูว่าแต่ละวิธีติดตั้งอะไร และทางเดินของน้ำเปลี่ยนไปอย่างไร ลากเพื่อหมุน เลื่อนล้อหรือบีบนิ้วเพื่อซูม</p>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="เลือกวิธี"></nav>
+
+  <div class="main">
+    <div class="stage" id="stage">
+      <div class="legend"><span><span class="dot"></span>ทางเดินของน้ำ</span><span class="hint">ภาพไม่ตามมาตราส่วนจริง</span></div>
+      <div class="labels" id="labels"></div>
+      <div class="hud">
+        <div class="ctrl">
+          <button class="btn" id="play" type="button">หยุดการไหล</button>
+          <button class="btn" id="lblBtn" type="button">ซ่อนป้าย</button>
+          <button class="btn" id="reset" type="button">มุมมองเริ่มต้น</button>
+        </div>
+        <label class="level" for="head">น้ำคลองสูงกว่าพื้นใน
+          <input id="head" type="range" min="0" max="1.2" step="0.1" value="0.6">
+          <output id="headOut">0.6 ม.</output>
+        </label>
+      </div>
+    </div>
+
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+
+  <section class="costs">
+    <h2>เทียบค่าใช้จ่ายต่อความยาวกำแพง 1 เมตร</h2>
+    <div class="chart"><div class="cgrid" id="cgrid"></div></div>
+    <p class="foot">ในทางปฏิบัติมักใช้หลายวิธีร่วมกัน เช่น ม่านกันซึม (C หรือ D) ในช่วงที่น้ำผุดรุนแรง ระบายใต้ดิน (B) เก็บน้ำส่วนที่ยังเล็ดลอด และอัดฉีด (A) เฉพาะจุดที่น้ำซึมผ่านตัวกำแพง ส่วนมาตรการเร่งด่วนและการสำรวจออกแบบเป็นค่าเหมาจ่าย จึงไม่อยู่ในกราฟนี้</p>
+  </section>
+
+  <section class="costs refs">
+    <h2>มาตรฐานและคู่มือที่ใช้อ้างอิงขั้นตอนการทำงาน</h2>
+    <p class="foot">รายการเดียวกับในรายงานแนวทางแก้ไข ใช้ประกอบการกำหนดวิธีทำงาน การตรวจรับ และการเขียน TOR มาตรฐาน EN และ ACI บางฉบับต้องซื้อ ลิงก์จะพาไปหน้ารายละเอียดหรือหน้าตัวอย่าง</p>
+    <div class="rgrid" id="ggrid"></div>
+  </section>
+
+  <section class="costs refs">
+    <h2>ลิงก์อ้างอิง ตัวอย่างวัสดุ และภาพงานจริง</h2>
+    <div class="rgrid" id="rgrid"></div>
+  </section>
+
+  <p class="foot">ราคาเป็นค่าประมาณสำหรับตั้งกรอบงบประมาณในประเทศไทย ยังไม่รวม VAT 7% และค่าควบคุมงาน 3–5% ราคาจริงอาจต่างได้ ±30–50% ชั้นดินในภาพเป็นการสมมติเพื่ออธิบาย วิธีและความลึกที่ใช้จริงต้องให้วิศวกรที่มีใบอนุญาตกำหนดจากผลเจาะสำรวจดิน ลิงก์ผู้ผลิตแสดงเป็นตัวอย่างวัสดุเท่านั้น ไม่ใช่การแนะนำยี่ห้อ</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+const Z = 4.07; // front cut face where flow is drawn
+
+/* ---------- flow paths (x,y on cut face; optional z) ---------- */
+const U1=[[-6,-2],[-4.6,-3.1],[-2.6,-3.5],[-0.9,-2.8],[0.6,-1.4],[1.5,0]];
+const U2=[[-7.6,-2],[-5,-4.3],[-2,-4.7],[0.4,-3.3],[1.4,-1.3],[1.55,0]];
+const SEAM=[[-3.3,-0.75],[-2.6,-1.05],[-1.4,-0.95],[-0.5,-0.35],[-0.25,0]];
+const WALL=[[-2.9,0.45],[-2.2,0.42],[-1.95,0.38],[-1.85,0.15],[-1.82,0]];
+function cutX(path,xb){const out=[path[0]];for(let i=1;i<path.length;i++){const a=path[i-1],b=path[i];if((a[0]-xb)*(b[0]-xb)<=0&&a[0]!==b[0]){const t=(xb-a[0])/(b[0]-a[0]);out.push([xb,a[1]+t*(b[1]-a[1])]);return out}out.push(b)}return out}
+const f=(pts,end,w=1,sp=1)=>({pts,end,w,sp});
+const TIP=[[-7.8,-2],[-4.5,-5.6],[-1.3,-7.25],[0.6,-5.4],[1.4,-3]];
+
+/* ---------- methods ---------- */
+const M=[
+{id:'problem',k:'!',chip:'สภาพปัญหา',code:'สภาพปัจจุบัน',name:'น้ำซึมผ่านกำแพงและลอดใต้ฐาน',en:'Seepage + underseepage',
+ principle:'ระดับน้ำในคลองสูงกว่าพื้นด้านในกำแพง แรงดันน้ำจึงดันน้ำผ่านรอยร้าวของกำแพง และลอดใต้ฐานรากผ่านชั้นดินที่น้ำซึมได้ ไปผุดขึ้นด้านใน ถ้าน้ำที่ผุดขุ่นและมีทราย แสดงว่าดินใต้ฐานถูกพาออก (Piping) ซึ่งทำให้เกิดโพรงและกำแพงทรุดได้',
+ flow:{wall:['s-flow','ไหล','ซึมผ่านรอยร้าว'],under:['s-flow','ไหล','ลอดใต้ฐาน ผุดพร้อมทราย']},
+ stepsTitle:'สิ่งที่ต้องทำก่อนเลือกวิธี',
+ steps:['เดินสำรวจตลอดแนวกำแพง ระบุตำแหน่งจุดรั่วและจุดน้ำผุด พร้อมภาพถ่าย','บันทึกลักษณะน้ำที่ผุด ใสหรือขุ่น มีทรายหรือไม่ และปริมาณโดยประมาณ','วัดระดับน้ำคลองเทียบกับระดับดินด้านในในวันที่สำรวจ','ว่าจ้างวิศวกรเจาะสำรวจดิน 2–3 หลุม ลึก 15–20 ม. และออกแบบ'],
+ cost:'180,000–450,000',cu:'บาท เหมาจ่าย',unit:'สำรวจ เจาะดิน และออกแบบ',extra:'จำเป็นทุกทางเลือก',fit:null,
+ refs:[['Sand boil (Wikipedia)','https://en.wikipedia.org/wiki/Sand_boil','กลไกการเกิดน้ำผุดพาทราย และความเสี่ยงต่อคันกั้นน้ำ'],['What is a sand boil? (Reclamation District 1000)','https://rd1000.org/what-is-a-sand-boil','ภาพจุดน้ำผุดหลังคันกั้นน้ำ และวิธีสังเกต']],
+ groups:['boil','ripple'],crack:'open',
+ paths:[f(U1,'boil'),f(U2,'boil',.8),f(SEAM,'boil',.6),f(WALL,'pass',.7,.7)],
+ labels:[['น้ำลอดใต้ฐานราก (Underseepage)',[-1.2,-3.4,Z]],['น้ำซึมผ่านรอยร้าว',[-1.9,1.5,1.5]],['จุดน้ำผุดพาทรายขึ้นมา (Sand boil)',[1.5,0.25,3.6]]],
+ cam:[[6.5,4,15],[-0.5,-2,1]]},
+{id:'urgent',k:'0',chip:'เร่งด่วน',code:'มาตรการระยะสั้น',name:'มาตรการเร่งด่วน',en:'Emergency measures',
+ principle:'ลดแรงดันที่จุดน้ำผุดและพาน้ำออกจากพื้นที่ระหว่างรอการแก้ไขถาวร มาตรการนี้ไม่ได้ตัดทางน้ำใต้ดิน',
+ flow:{wall:['s-managed','จัดการได้','ไหลลงรางชั่วคราว แล้วสูบออก'],under:['s-managed','ชะลอ','ยังไหล วงกระสอบทรายยกระดับน้ำในวงเพื่อลดแรงดันและหยุดการพาทราย']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['ก่อกระสอบทรายเป็นวงรอบจุดน้ำผุด ให้น้ำในวงยกตัวขึ้น ห้ามอุดจุดผุดจนสนิท เพราะน้ำจะไปผุดจุดใหม่','ขุดรางระบายชั่วคราวด้านในแนวกำแพง รวบรวมน้ำไปบ่อพักแล้วสูบออก','ติดตั้งหรือซ่อมวาล์วกันน้ำย้อน (Flap valve) ที่ปากท่อระบายลงคลอง','ตัดต้นไม้และวัชพืชชิดกำแพง ทำหมุดวัดระดับน้ำ และถ่ายภาพจุดเดิมทุกสัปดาห์'],
+ cost:'80,000–250,000',cu:'บาท เหมาจ่าย',unit:'ขึ้นกับจำนวนจุดผุดและปากท่อ',extra:'',
+ refs:[['USACE Sandbag Pamphlet','https://extension.usu.edu/post-wildfire/files/USACE-Sandbag-Pamphlet.pdf','คู่มือกองทัพวิศวกรสหรัฐฯ มีภาพการก่อวงกระสอบทรายรอบจุดน้ำผุด (PDF)'],['Tideflex valves vs flap valves','https://measurit.odoo.com/blog/tideflex-checkmate-valve-benefits-3/tideflex-valves-vs-flap-valves-5','เปรียบเทียบวาล์วกันน้ำย้อนแบบบานพับกับแบบยาง พร้อมภาพ'],['Tideflex check valves for backflow prevention','https://stormwater.com/home/product/33043110/tideflex-check-valves-for-backflow-prevention','ตัวอย่างวาล์วกันย้อนที่ปากท่อระบายลงแหล่งน้ำ']],fit:'ทำทันทีในทุกช่วงที่พบน้ำผุด ระหว่างรอผลสำรวจและการออกแบบ',
+ groups:['boil','urgent'],crack:'open',
+ paths:[f(U1,'boil',.7,.6),f(U2,'boil',.6,.6),f(SEAM.concat([[0.15,0.02]]),'drain',.6),f(WALL.concat([[0.15,0.02]]),'drain',.7,.7),f([[0.15,0.03,Z],[0.15,0.03,-3.3]],'drain',1.2,.9)],
+ labels:[['วงกระสอบทราย (Ring dike)',[1.5,0.45,3.3]],['รางระบายชั่วคราว',[0.15,0.1,0.5]],['วาล์วกันน้ำย้อน',[-2.7,0.45,-2]],['เครื่องสูบน้ำ',[0.15,0.55,-3.6]]],
+ cam:[[7,6,11],[-0.5,0,0]]},
+{id:'A',k:'A',chip:'อัดฉีดรอยร้าว',code:'ทางเลือก A',name:'อัดฉีดกำแพงและอุดรอยร้าว',en:'PU / Epoxy crack injection',
+ principle:'ปิดทางน้ำที่ซึมผ่านตัวกำแพง โดยอัดพียูชนิดขยายตัวเมื่อโดนน้ำเข้าไปในรอยร้าว แล้วฉาบผิวด้านในด้วยวัสดุกันซึมที่ทนแรงดันน้ำจากด้านตรงข้าม',
+ flow:{wall:['s-stopped','หยุด','หยุดที่ตัวกำแพง'],under:['s-flow','ไหล','ยังลอดใต้ฐาน วิธีนี้แก้ไม่ได้']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['สกัดเปิดรอยร้าว อุดจุดน้ำไหลแรงด้วยปูนอุดน้ำรั่วแห้งเร็ว (Hydraulic cement)','เจาะรูเอียงประมาณ 45° สลับซ้ายขวา ให้ตัดผ่านรอยร้าวกลางความหนากำแพง แล้วติดตั้งหัวอัดฉีด (Packer)','อัดพียูจากหัวต่ำสุดขึ้นไป จนวัสดุไหลออกที่หัวถัดไป รอยร้าวโครงสร้างที่แห้งแล้วใช้อีพ็อกซี่แทน','ถอดหัวอัดฉีด อุดรู แล้วฉาบกันซึมชนิดซีเมนต์หรือชนิดตกผลึกด้านใน'],
+ cost:'600–1,500',cu:'บาท/ม.',unit:'ถ้าซ่อมเฉพาะจุด ค่าใช้จ่ายลดลงตามสัดส่วน',extra:'ต้องซ่อมซ้ำเป็นระยะ',
+ refs:[['Packers and couplers help Nitofill PU stop every leak (Fosroc)','https://fosroc.com.au/news/packers-and-couplers-help-nitofill-pu-stop-every-leak','ภาพหัวอัดฉีดที่ติดตั้งตามแนวรอยร้าว และการอัดพียูหยุดน้ำรั่ว'],['Nitofill Injection Packers TDS (Fosroc)','https://prod.fosroc.com.au/sites/default/files/products_file_storage/Fosroc_Nitofill_Injection_Packers_TDS.pdf','เอกสารข้อมูลหัวอัดฉีดแบบต่างๆ (PDF)'],['Crack injection hardware for basements (Adheseal)','https://adheseal.com.au/collections/crack-injection-hardware/basements','แคตตาล็อกหัวอัดฉีด ปืนอัด และพียู พร้อมภาพสินค้า'],['Hydraulic Cement (Rust-Oleum Concrete Saver)','https://www.rustoleum.com/product-catalog/industrial-brands/concrete-saver-pro/rebuild/hydraulic-cement','ตัวอย่างปูนอุดน้ำรั่วแห้งเร็ว']],fit:'น้ำซึมผ่านตัวกำแพงอย่างเดียว ไม่มีน้ำผุดจากดิน ในกรณีนี้ใช้เสริมเฉพาะจุดร่วมกับวิธีอื่น',
+ groups:['boil','ripple','A'],crack:'sealed',
+ paths:[f(U1,'boil'),f(U2,'boil',.8),f(SEAM,'boil',.6),f(cutX(WALL,-2.21),'blocked',.7,.7)],
+ labels:[['หัวอัดฉีด (Packer) เอียง 45°',[-1.8,1.95,1.5]],['ฉาบกันซึมด้านใน',[-1.85,0.75,-2.5]],['น้ำลอดใต้ฐานยังไหล',[-1.2,-3.4,Z]]],
+ cam:[[4.5,3.2,8.5],[-2,0.6,0.5]]},
+{id:'B',k:'B',chip:'ระบายใต้ดิน',code:'ทางเลือก B',name:'ระบบระบายน้ำใต้ดินพร้อมบ่อสูบ',en:'Sub-drain + sump pump',
+ principle:'ไม่ได้หยุดน้ำ แต่ดักน้ำที่ลอดใต้ฐานไว้ในร่องกรวดก่อนถึงผิวดิน แผ่นใยสังเคราะห์ทำหน้าที่กรองให้น้ำผ่านแต่ดินไม่ไหลตาม จากนั้นสูบน้ำกลับลงคลอง',
+ flow:{wall:['s-flow','ไหล','ยังซึมผ่านรอยร้าว'],under:['s-managed','ดักไว้','ถูกดักเข้าท่อพรุน แล้วสูบออก']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['ขุดร่องเป็นช่วงสั้นไม่เกินประมาณ 10 ม. ต่อครั้ง กว้าง 0.5 ม. ลึก 0.8–1.2 ม. ไม่ลึกกว่าฐานรากกำแพง','ปูแผ่นใยสังเคราะห์ (Geotextile) รองกรวด วางท่อพรุน HDPE/PVC 4–6 นิ้ว ลาดเอียงไปบ่อพัก','ถมกรวดล้างสะอาด พับแผ่นใยปิดทับ ถมดินและบดอัด','ทำบ่อพักทุก 30–40 ม. และบ่อสูบ 2–3 จุด พร้อมปั๊มลูกลอยและท่อส่งออกที่มีวาล์วกันย้อน'],
+ cost:'1,500–3,000',cu:'บาท/ม.',unit:'บวกบ่อสูบพร้อมปั๊มและระบบไฟ จุดละประมาณ 70,000–220,000 บาท',extra:'มีค่าไฟและดูแลปั๊มต่อเนื่องทุกปี',fit:'น้ำซึมปานกลาง ฐานรากยังแข็งแรง มักใช้ร่วมกับ C หรือ D เพื่อเก็บน้ำส่วนที่ยังเล็ดลอด',
+ refs:[['French drain (Wikipedia)','https://en.wikipedia.org/wiki/French_drain','หลักการร่องกรวดและท่อพรุน พร้อมภาพหน้าตัด'],['How to build a French drain (HelloGravel)','https://hellogravel.com/guides/how-to-build-a-french-drain/','ขั้นตอนขุดร่อง ปูผ้าใยสังเคราะห์ วางท่อ และถมกรวด พร้อมภาพ'],['Solving drainage problems with a French drain (Landscape Management)','https://www.landscapemanagement.net/solving-drainage-problems-with-a-french-drain/','ภาพงานติดตั้งจริงในพื้นที่พักอาศัย']],
+ groups:['B'],crack:'open',
+ paths:[f(U1.slice(0,4).concat([[0.3,-1.6],[0.9,-0.95]]),'drain'),f([[-7.6,-2],[-5,-4.3],[-2,-4.7],[0.2,-3.4],[0.85,-1.9],[0.92,-1.0]],'drain',.8),f([[-3.3,-0.75],[-2.6,-1.05],[-1.4,-0.95],[0.2,-0.95],[0.65,-0.9]],'drain',.6),f(WALL,'pass',.7,.7),
+   f([[0.9,-0.9,Z],[0.9,-0.9,-3]],'pass',1.4,.9),f([[0.9,-0.9,-3],[0.9,0.35,-3],[-1,0.35,-3],[-2,2.65,-3],[-2.6,2.65,-3],[-3,1,-3]],'drain',.9,.9)],
+ labels:[['ร่องกรวดหุ้ม Geotextile',[0.9,-0.3,Z]],['ท่อพรุน 4–6 นิ้ว',[0.9,-0.75,1.5]],['บ่อสูบ + ปั๊มลูกลอย',[0.9,0.8,-3]],['ท่อส่งออก + วาล์วกันย้อน',[-2.3,2.8,-3]]],
+ cam:[[7.5,5,10.5],[0,-0.5,-0.5]]},
+{id:'C',k:'C',chip:'เข็มพืด',code:'ทางเลือก C',name:'เข็มพืดกันซึม',en:'Sheet pile cut-off',
+ principle:'ตอกแผ่นเข็มพืดต่อกันเป็นม่านลงไปถึงชั้นดินเหนียวทึบน้ำ ตัดทางน้ำที่ลอดใต้ฐานรากโดยตรง น้ำที่เหลือต้องอ้อมใต้ปลายเข็มซึ่งยาวและผ่านดินทึบ ปริมาณจึงลดลงมาก',
+ flow:{wall:['s-flow','ไหล','ยังซึมผ่านรอยร้าว ใช้ A ร่วม'],under:['s-stopped','ตัดแล้ว','เหลือซึมเล็กน้อยใต้ปลายเข็ม']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['สำรวจสาธารณูปโภคใต้ดินและแนวฐานรากเดิม เตรียมทางเข้าเครื่องจักร','ตอกด้วยเครื่องสั่น (Vibro hammer) ต่อเนื่องเป็นแนวเดียว ลึก 6–9 ม. ตามผลเจาะดิน','อุดรอยต่อเข็มพืด แล้วทำคานหัวเข็มคอนกรีตยึดกับกำแพงเดิม','เข็มพืดเหล็กถาวรต้องเคลือบกันสนิม หรือเลือกชนิดคอนกรีตอัดแรงหรือไวนิล'],
+ cost:'12,000–25,000',cu:'บาท/ม.',unit:'เข็มพืดคอนกรีตอัดแรงหรือไวนิล',extra:'เหล็กถาวร 32,000–65,000 บาท/ม.',
+ refs:[['ชีทไพล์เหล็ก SYS (OneStockHome)','https://www.onestockhome.com/th/product_categories/sheet-pile','ผู้จำหน่ายในไทย มีภาพและตารางราคาเข็มพืดเหล็ก'],['Synthetic (vinyl) sheet piling (Everlast Seawalls)','https://everlastseawalls.com/geotechnical-applications-using-synthetic-sheet-piling/','ภาพเข็มพืดไวนิลที่ใช้เป็นม่านกันซึมในคันกั้นน้ำ'],['Construction of thin anti-seepage cut-off walls (Vulcanhammer)','https://vulcanhammer.info/2026/07/24/construction-of-thin-anti-seepage-cut-off-walls/','บทความเทคนิคการทำม่านกันซึมแบบบาง']],fit:'น้ำซึมมาก หรือเริ่มมีการพาดินออกแล้ว ต้องมีแบบที่วิศวกรรับรอง และอาจต้องขออนุญาตถ้าทำฝั่งคลอง',
+ groups:['C'],crack:'open',
+ paths:[f(cutX(U1,-1.46),'blocked'),f(cutX(U2,-1.46),'blocked',.8),f(cutX(SEAM,-1.46),'blocked',.6),f(TIP,'fade',.35,.35),f(WALL,'pass',.7,.7)],
+ labels:[['เข็มพืด ลึก 6–9 ม. ถึงชั้นดินเหนียว',[-1.3,-4.2,Z]],['คานหัวเข็ม (Capping beam)',[-1.3,0.4,1.5]],['ซึมเล็กน้อยใต้ปลายเข็ม',[0.4,-6.4,Z]]],
+ cam:[[5.5,2.2,14],[-1.3,-3.5,1]]},
+{id:'D',k:'D',chip:'Jet grouting',code:'ทางเลือก D',name:'ม่านอัดฉีดใต้ดิน',en:'Jet grouting curtain',
+ principle:'อัดน้ำปูนแรงดันสูงผสมกับดินเป็นเสาดินซีเมนต์ เรียงซ้อนทับกันเป็นผนังทึบน้ำใต้ดิน ทำได้ในพื้นที่แคบ และสั่นสะเทือนน้อยกว่าการตอกเข็มพืด จึงกระทบบ้านข้างเคียงน้อยกว่า',
+ flow:{wall:['s-flow','ไหล','ยังซึมผ่านรอยร้าว ใช้ A ร่วม'],under:['s-stopped','ตัดแล้ว','ถูกตัดด้วยผนังดินซีเมนต์']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['เจาะนำ แล้วอัดฉีดน้ำปูนแรงดันสูงเป็นเสาดินซีเมนต์ Ø 0.6–0.8 ม.','จัดระยะให้เสาซ้อนทับกันเป็นผนังต่อเนื่อง ลึกประมาณ 6–9 ม. ชิดแนวกำแพงด้านใน','เก็บตัวอย่างเสาทดสอบกำลังอัดและการซึมผ่านน้ำ','จัดการน้ำโคลนจากการอัดฉีด และคืนสภาพผิวดิน'],
+ cost:'21,000–35,000',cu:'บาท/ม.',unit:'อิงราคากลางกรมชลประทาน 2569',extra:'ผู้รับเหมาเอกชนงานเล็กมักสูงกว่า',
+ refs:[['Jet grouting brochure (Keller UK)','https://keller-ge.co.uk/sites/keller-uk/files/2019-03/jet-grouting-brochure-keller-uk.pdf','ภาพเครื่องจักร เสาดินซีเมนต์ที่ขุดเปิดออกมา และการจัดเรียงเป็นผนัง (PDF)'],['Jet grouting brochure (Keller North America)','https://www.keller-na.com/sites/keller-na/files/2023-09/keller-jet-grouting-brochure.pdf','ระบบ Single / Double / Triple fluid และงานตัวอย่าง (PDF)'],['Dams and levees brochure (Keller)','https://www.keller-na.com/sites/keller-na/files/2020-09/keller-dams-levees-brochure.pdf','การทำม่านกันซึมใต้คันกั้นน้ำด้วยวิธีต่างๆ (PDF)'],['Pressure grouting (Wikipedia)','https://en.wikipedia.org/wiki/Jet_grouting','ภาพรวมการอัดฉีดแรงดันสูงในงานปรับปรุงดิน']],fit:'พื้นที่แคบ เครื่องจักรใหญ่เข้าไม่ได้ หรือไม่ต้องการแรงสั่นกระทบบ้านที่อยู่ชิดแนวกำแพง',
+ groups:['D'],crack:'open',
+ paths:[f(cutX(U1,-1.57),'blocked'),f(cutX(U2,-1.57),'blocked',.8),f(cutX(SEAM,-1.57),'blocked',.6),f(TIP,'fade',.3,.35),f(WALL,'pass',.7,.7)],
+ labels:[['เสาดินซีเมนต์ Ø0.6–0.8 ม. ซ้อนทับกัน',[-1.2,-4.2,Z]],['ลึก 6–9 ม.',[-1.2,-7.1,2]]],
+ cam:[[5.5,2.5,13.5],[-1.2,-3.5,0.5]]},
+{id:'E',k:'E',chip:'กำแพงใหม่',code:'ทางเลือก E',name:'สร้างกำแพง คสล. ใหม่',en:'New RC retaining / flood wall',
+ principle:'รื้อกำแพงเดิมแล้วสร้างผนังคอนกรีตเสริมเหล็กบนฐานรากเสาเข็ม ออกแบบรับแรงดันน้ำ มีแผ่นกันซึม (Waterstop) ที่รอยต่อ และช่องระบายแรงดันด้านหลัง น้ำลอดใต้ฐานจะลดลงแค่ไหนขึ้นกับความลึกฐานและม่านกันซึมที่วิศวกรกำหนด',
+ flow:{wall:['s-stopped','หยุด','ผนังใหม่กันซึม'],under:['s-managed','ลดลง','ขึ้นกับความลึกฐานและม่านกันซึม']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['รื้อกำแพงเดิมทีละช่วง ทำรั้วชั่วคราวเพื่อความปลอดภัย','ตอกเสาเข็มคอนกรีต ทำฐานรากและผนัง คสล. สูงประมาณ 2.0–2.5 ม.','ติดแผ่นกันซึม (Waterstop) ที่รอยต่อ และทำชั้นกันซึมด้านคลอง','ทำช่องระบายแรงดันน้ำ (Weep hole) และระบบระบายหลังกำแพง'],
+ cost:'25,000–50,000',cu:'บาท/ม.',unit:'รวมเสาเข็ม',extra:'ค่าดูแลระยะยาวต่ำ',
+ refs:[['Sika Waterbar (Sika)','https://sgp.sika.com/en/construction/waterproofing/joints-waterproofing/sika-waterbar-o-dwallvn.html','ตัวอย่างแผ่นกันซึม PVC ที่ฝังในรอยต่อคอนกรีต พร้อมภาพ'],['Polybit Polystop PVC waterstop TDS (Henkel)','https://datasheets.tdx.henkel.com/POLYBIT-Polystop-en_AE.pdf','รูปแบบหน้าตัด Waterstop และวิธีติดตั้ง (PDF)'],['Nippon PVC Waterstop TDS','https://professional.nipponpaint.com.my/downloads/tds-nippon-pvc-waterstop-2017-07.pdf','ขนาดและการต่อแผ่นกันซึม (PDF)']],fit:'ช่วงที่กำแพงเดิมเสียหายแล้ว หรือต้องการยกระดับป้องกันน้ำท่วมระยะยาว',
+ groups:['E'],crack:'none',hideOld:true,
+ paths:[f(U1,'boil',.45,.6),f(U2,'boil',.35,.6),f(cutX([[-3.3,-0.9],[-2.9,-1.0],[-1.4,-1.0]],-2.9),'blocked',.6),f(cutX(WALL,-2.32),'blocked',.7,.7)],
+ labels:[['ผนัง คสล. ใหม่ + Waterstop',[-2.1,2.85,1]],['ฐานรากบนเสาเข็ม',[-2.1,-0.95,Z]],['ช่องระบายแรงดัน (Weep hole)',[-1.9,0.75,-1]]],
+ cam:[[5.5,4,12],[-2,-1,1]]}
+];
+/* ---------- guideline references (from the solution report) ---------- */
+const GD={
+ em1901:['USACE EM 1110-2-1901','Seepage Analysis and Control for Dams','https://prod.damtoolbox.org/images/7/7a/EM1110-2-1901.pdf','การวิเคราะห์น้ำซึม และเกณฑ์ชั้นกรองป้องกันดินถูกพาออก (Piping) (PDF)'],
+ em1913:['USACE EM 1110-2-1913','Design and Construction of Levees','https://apps.dtic.mil/sti/pdfs/ADA402946.pdf','การควบคุมน้ำลอดใต้คันกั้นน้ำ ร่องระบาย และบ่อลดแรงดัน (PDF)'],
+ ced:['Cedergren','Seepage, Drainage, and Flow Nets (3rd ed., Wiley)','https://gov.wiley.com/WileyCDA/WileyTitle/productCd-047118053X.html','ตำราการออกแบบชั้นกรองและระบบระบายน้ำใต้ดิน (หนังสือ)'],
+ ffh:['USACE','Flood-Fight Handbook (Walla Walla District, 2015)','https://juneau.org/wp-content/uploads/2024/10/USACE-Flood-Fight-Handbook.pdf','การล้อมกระสอบทรายรอบจุดน้ำผุด และการเฝ้าระวังช่วงน้ำสูง (PDF)'],
+ aci224:['ACI 224.1R','Causes, Evaluation, and Repair of Cracks in Concrete Structures','https://www.concrete.org/publications/internationalconcreteabstractsportal/m/details/id/18555','สาเหตุ การประเมิน และการซ่อมรอยร้าว รวมถึงการอัดฉีดอีพ็อกซี่และพียู'],
+ aci546:['ACI 546R','Guide to Concrete Repair','https://concrete.org/Portals/0/Files/PDF/Previews/546R_14_PREVIEW.pdf','การเตรียมผิว การเลือกวัสดุ และวิธีซ่อมคอนกรีต (หน้าตัวอย่าง PDF)'],
+ aph:['ArcelorMittal','Piling Handbook, 9th ed. (2022)','https://palplanches.arcelormittal.com/wp-content/uploads/2022/05/AMCRPS_Piling_Handbook_9th_Revision_2022_web.pdf','การเลือกหน้าตัด วิธีตอก การอุดรอยต่อ และการป้องกันสนิมเข็มพืด (PDF)'],
+ en12063:['EN 12063','Execution of special geotechnical work: Sheet pile walls','https://knowledge.bsigroup.com/products/execution-of-special-geotechnical-work-sheet-pile-walls-combined-pile-walls-high-modulus-walls','เกณฑ์ความคลาดเคลื่อนและการบันทึกการตอกเข็มพืด (ต้องซื้อ)'],
+ gec12:['FHWA GEC 12','Ground Modification Methods Reference Manual, Vol. I','https://rosap.ntl.bts.gov/view/dot/40552','วิธีปรับปรุงดินรวมถึง Jet grouting การออกแบบและควบคุมคุณภาพ'],
+ en12716:['EN 12716','Execution of special geotechnical work: Jet grouting','https://shop-checkout.bsigroup.com/products/execution-of-special-geotechnical-work-jet-grouting','การทดสอบเสาดินซีเมนต์และการควบคุมงานอัดฉีด (ต้องซื้อ)'],
+ tis1390:['มอก. 1390-2566','เข็มพืดเหล็กรีดร้อน (สมอ.)','https://service.tisi.go.th/fulltext/TIS1390-2566.pdf','มาตรฐานผลิตภัณฑ์ที่ใช้ตรวจรับเข็มพืดเหล็ก (PDF)'],
+ dpt:['กรมโยธาธิการฯ','แบบงานเขื่อนป้องกันตลิ่ง','https://www.yotathai.com/yotanews/river-bank-protection','แบบมาตรฐานงานป้องกันตลิ่งริมน้ำของกรมโยธาธิการและผังเมือง'],
+ bca:['พ.ร.บ.ควบคุมอาคาร 2522','รั้วและกำแพงตามกฎหมายควบคุมอาคาร','https://www.nakhoncity.org/law/pdf/law060268.pdf','รั้วหรือกำแพงที่ติดที่สาธารณะถือเป็นอาคาร ต้องขออนุญาตก่อสร้าง (PDF)']
+};
+const GL={problem:['em1901','em1913','ced'],urgent:['ffh','em1913'],A:['aci224','aci546'],B:['em1913','em1901','ced'],C:['aph','en12063','tis1390'],D:['gec12','en12716'],E:['aci546','dpt','bca']};
+const BASE_LABELS=[['คลอง',[-6.5,1.3,1.5]],['พื้นที่ด้านใน',[5.8,2.9,-1]],['ชั้นดินที่น้ำซึมผ่านได้',[4.6,-3.2,Z]],['ชั้นดินเหนียวทึบน้ำ',[4.6,-7.1,Z]]];
+
+/* ---------- three.js scene ---------- */
+const stage=document.getElementById('stage');
+if(!window.THREE){stage.insertAdjacentHTML('beforeend','<p style="padding:20px">โหลดไลบรารี 3D ไม่สำเร็จ กรุณาโหลดหน้าใหม่</p>');}
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+stage.prepend(renderer.domElement);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(38,1,0.1,200);
+camera.position.set(6.5,4,15);
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;controls.target.set(-0.5,-2,1);controls.maxDistance=40;controls.minDistance=4;controls.maxPolarAngle=Math.PI*0.62;
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x6b5d4c,0.75));
+const sun=new THREE.DirectionalLight(0xffffff,0.75);sun.position.set(6,12,9);scene.add(sun);
+
+const mat=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.9,metalness:0},o));
+const box=(x0,x1,y0,y1,z0,z1,m)=>{const g=new THREE.BoxGeometry(x1-x0,y1-y0,z1-z0);const me=new THREE.Mesh(g,m);me.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);return me};
+function extrude(pts,m,z0=-4,z1=4){const s=new THREE.Shape();pts.forEach((p,i)=>i?s.lineTo(p[0],p[1]):s.moveTo(p[0],p[1]));const g=new THREE.ExtrudeGeometry(s,{depth:z1-z0,bevelEnabled:false});g.translate(0,0,z0);return new THREE.Mesh(g,m)}
+const G={};['base','old','boil','ripple','urgent','A','B','C','D','E'].forEach(k=>{G[k]=new THREE.Group();scene.add(G[k])});
+
+// soil strata
+G.base.add(extrude([[-9,-8],[8,-8],[8,-6.5],[-9,-6.5]],mat(0x7c6a57)));
+G.base.add(extrude([[-9,-6.5],[8,-6.5],[8,0],[-2.2,0],[-4.5,-2],[-9,-2]],mat(0xb48d5c)));
+G.base.add(box(-1.95,8,0,0.015,-4,4,mat(0x7f9a5c))); // lawn
+// canal water
+const waterM=mat(0x2f86ab,{transparent:true,opacity:.5,roughness:.3});
+G.base.add(extrude([[-9,-2],[-4.5,-2],[-2.2,0],[-9,0]],waterM,-4,3.98));
+const waterTop=box(-9,-2.2,0,1,-4,3.98,waterM);G.base.add(waterTop);
+// house
+G.base.add(box(4.6,7.4,0,2.2,-3.2,0.6,mat(0xe3dccf)));
+G.base.add(box(4.4,7.6,2.2,2.45,-3.4,0.8,mat(0x8b4c3b)));
+// old wall + footing
+G.old.add(box(-2.2,-1.95,0,2.4,-4,4,mat(0xc8c1b3)));
+G.old.add(box(-2.55,-1.6,-0.8,0,-4,4.02,mat(0x9fa39d)));
+const crackM=new THREE.LineBasicMaterial({color:0x3a2e26});
+const crack=new THREE.Line(new THREE.BufferGeometry().setFromPoints([[0.1,0],[0.5,0.12],[0.85,-0.08],[1.25,0.1],[1.6,-0.05],[1.95,0.06]].map(p=>new THREE.Vector3(-1.944,p[0],1.5+p[1]))),crackM);
+G.old.add(crack);
+// ruler
+const rM=new THREE.LineBasicMaterial({color:0x6b746f});
+const rp=[new THREE.Vector3(8.05,0,Z),new THREE.Vector3(8.05,-8,Z)];
+for(let y=0;y>=-8;y-=1){rp.push(new THREE.Vector3(8.05,y,Z),new THREE.Vector3(8.25,y,Z))}
+G.base.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(rp),rM));
+
+// boils + ripple
+const sandM=mat(0xd2b583);
+[[1.5,3.6],[2.4,-1.5]].forEach(([x,z])=>{const c=new THREE.Mesh(new THREE.ConeGeometry(.35,.14,20),sandM);c.position.set(x,.07,z);G.boil.add(c)});
+const rippleM=new THREE.MeshBasicMaterial({color:0x2f86ab,transparent:true,opacity:.6,side:THREE.DoubleSide});
+const ripples=[[1.5,3.6],[2.4,-1.5]].map(([x,z])=>{const r=new THREE.Mesh(new THREE.RingGeometry(.3,.36,32),rippleM.clone());r.rotation.x=-Math.PI/2;r.position.set(x,.03,z);G.ripple.add(r);return r});
+
+// urgent: sandbag ring, pond, channel, flap valve, pump
+const bagM=mat(0xcbb688);
+for(let L=0;L<2;L++)for(let i=0;i<11;i++){const a=i/11*Math.PI*2+L*.28;const b=new THREE.Mesh(new THREE.BoxGeometry(.32,.13,.18),bagM);b.position.set(1.5+Math.cos(a)*.62,.07+L*.13,3.3+Math.sin(a)*.62);b.rotation.y=-a+Math.PI/2;G.urgent.add(b)}
+const pond=new THREE.Mesh(new THREE.CircleGeometry(.5,32),mat(0x2f86ab,{transparent:true,opacity:.7,roughness:.2}));pond.rotation.x=-Math.PI/2;pond.position.set(1.5,.2,3.3);G.urgent.add(pond);
+G.urgent.add(box(0,.3,-.06,.03,-3.5,4.02,mat(0x3b6f86,{roughness:.4})));
+const pipeM=mat(0x5d6670);
+const fp=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,1.1,16),pipeM);fp.rotation.z=Math.PI/2;fp.position.set(-2.1,.3,-2);G.urgent.add(fp);
+const flap=new THREE.Mesh(new THREE.CylinderGeometry(.17,.17,.04,20),mat(0x2b2f33));flap.rotation.z=Math.PI/2;flap.position.set(-2.67,.3,-2);G.urgent.add(flap);
+G.urgent.add(box(-.05,.4,.03,.38,-3.85,-3.3,mat(0x2e5d8a)));
+
+// A: packers + coating
+const packM=mat(0xd6a21e,{roughness:.5});
+[0.35,0.75,1.15,1.55,1.9].forEach((y,i)=>{const p=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,.24,10),packM);p.position.set(-1.88,y,1.5+(i%2?.12:-.12));p.rotation.z=(i%2?1:-1)*Math.PI/4;p.rotation.x=Math.PI/2*0;p.rotation.y=0;G.A.add(p)});
+G.A.add(box(-1.95,-1.925,0,1.2,-4,4,mat(0x8fa2a8,{transparent:true,opacity:.85})));
+
+// B: trench, pipe, geotextile, sump, discharge
+G.B.add(box(.55,1.25,-1.15,.025,-4,4.02,mat(0x8f938d)));
+const geo=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(.72,1.19,8.04)),new THREE.LineBasicMaterial({color:0xf2f2ea}));geo.position.set(.9,-.565,0.01);G.B.add(geo);
+const pipeClear=mat(0xe9e3d3,{transparent:true,opacity:.45,roughness:.4});
+const dp=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,8.06,18),pipeClear);dp.rotation.x=Math.PI/2;dp.position.set(.9,-.9,0.02);G.B.add(dp);
+const sump=new THREE.Mesh(new THREE.CylinderGeometry(.45,.45,1.7,24,1,true),mat(0x9a9d97,{side:THREE.DoubleSide}));sump.position.set(.9,-.8,-3);G.B.add(sump);
+const lid=new THREE.Mesh(new THREE.RingGeometry(.3,.47,24),mat(0x6d716c,{side:THREE.DoubleSide}));lid.rotation.x=-Math.PI/2;lid.position.set(.9,.06,-3);G.B.add(lid);
+G.B.add(box(.75,1.05,.06,.4,-3.15,-2.85,mat(0x2e5d8a)));
+const dc=new THREE.CatmullRomCurve3([[0.9,0.35,-3],[-1,0.35,-3],[-2,2.65,-3],[-2.6,2.65,-3],[-3,1,-3]].map(p=>new THREE.Vector3(...p)),false,'catmullrom',.1);
+G.B.add(new THREE.Mesh(new THREE.TubeGeometry(dc,60,.07,10,false),pipeClear));
+
+// C: corrugated sheet pile + capping beam
+(function(){const s=new THREE.Shape(),amp=.12,per=.8,th=.05,top=[],bot=[];for(let z=-4,i=0;z<=4.02+1e-6;z+=per/2,i++){const v=i%2?amp:-amp;top.push([Math.min(z,4.02),v]);}
+ top.forEach((p,i)=>i?s.lineTo(p[0],p[1]):s.moveTo(p[0],p[1]));for(let i=top.length-1;i>=0;i--)s.lineTo(top[i][0],top[i][1]-th);
+ const g=new THREE.ExtrudeGeometry(s,{depth:7.25,bevelEnabled:false});g.applyMatrix4(new THREE.Matrix4().set(0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,1));g.translate(-1.3,-7,0);
+ G.C.add(new THREE.Mesh(g,mat(0x56656e,{metalness:.4,roughness:.55})));})();
+G.C.add(box(-1.48,-1.12,0,.3,-4,4.02,mat(0xa9aca6)));
+
+// D: jet grout columns + cut slab
+const groutM=mat(0xc9c2ae);
+for(let z=-3.64;z<=3.65;z+=.56){const c=new THREE.Mesh(new THREE.CylinderGeometry(.36,.36,6.8,22),groutM);c.position.set(-1.2,-3.6,z);G.D.add(c)}
+G.D.add(box(-1.56,-.84,-7,-.2,3.9,4.02,groutM));
+
+// E: new RC wall
+const rcM=mat(0xb9bdbc);
+G.E.add(box(-2.3,-1.95,0,2.6,-4,4,rcM));
+G.E.add(box(-2.9,-1.3,-1.3,-.6,-4,4.02,rcM));
+G.E.add(box(-2.32,-2.3,-.6,2.6,-4,4,mat(0x23344a)));
+[-2.55,-1.65].forEach(x=>[-3,-1,1,3].forEach(z=>{const p=new THREE.Mesh(new THREE.CylinderGeometry(.15,.15,5.5,14),rcM);p.position.set(x,-4.05,z);G.E.add(p)}));
+[-3,-1,1,3].forEach(z=>{const w=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,.37,10),mat(0x1d2226));w.rotation.z=Math.PI/2;w.position.set(-2.12,.45,z);G.E.add(w)});
+
+/* ---------- particles ---------- */
+const MAX=900;
+const pg=new THREE.BufferGeometry();
+const pos=new Float32Array(MAX*3),alp=new Float32Array(MAX);
+pg.setAttribute('position',new THREE.BufferAttribute(pos,3));pg.setAttribute('alpha',new THREE.BufferAttribute(alp,1));
+const pMat=new THREE.ShaderMaterial({uniforms:{uColor:{value:new THREE.Color(0x2a95c9)},uSize:{value:11*renderer.getPixelRatio()}},
+ vertexShader:'attribute float alpha;varying float vA;uniform float uSize;void main(){vA=alpha;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_PointSize=uSize*(10.0/-mv.z);gl_Position=projectionMatrix*mv;}',
+ fragmentShader:'uniform vec3 uColor;varying float vA;void main(){vec2 c=gl_PointCoord-0.5;float d=length(c);if(d>0.5)discard;gl_FragColor=vec4(uColor,smoothstep(0.5,0.2,d)*vA);}',
+ transparent:true,depthWrite:false,depthTest:false});
+const points=new THREE.Points(pg,pMat);points.frustumCulled=false;points.renderOrder=10;scene.add(points);
+let parts=[];
+function prep(p){const v=p.pts.map(q=>new THREE.Vector3(q[0],q[1],q.length>2?q[2]:Z));const cum=[0];for(let i=1;i<v.length;i++)cum.push(cum[i-1]+v[i].distanceTo(v[i-1]));return Object.assign({},p,{v,cum,len:cum[cum.length-1]})}
+function sample(p,u,out){const d=u*p.len;let i=1;while(i<p.cum.length-1&&p.cum[i]<d)i++;const a=p.cum[i-1],b=p.cum[i];out.lerpVectors(p.v[i-1],p.v[i],b>a?(d-a)/(b-a):0);return out}
+function buildParticles(m){parts=[];m.paths.map(prep).forEach(p=>{const n=Math.max(4,Math.round(p.w*p.len*3.2));for(let i=0;i<n&&parts.length<MAX;i++)parts.push({p,ph:Math.random(),j:(Math.random()-.5)*.12})})}
+const tmp=new THREE.Vector3();
+function updParticles(t){const k=0.25+head*1.0;for(let i=0;i<MAX;i++){if(i>=parts.length){alp[i]=0;continue}const q=parts[i],p=q.p;const u=((q.ph+t*0.9*k*p.sp/p.len)%1+1)%1;sample(p,u,tmp);
+ pos[i*3]=tmp.x;pos[i*3+1]=tmp.y+(p.v[0].z===Z?q.j:0);pos[i*3+2]=tmp.z;
+ let a=Math.min(1,u/0.05);const tail=p.end==='blocked'?0.22:0.12;if(u>1-tail)a*=(1-u)/tail;if(p.end==='fade')a*=0.55;alp[i]=a*Math.min(1,0.35+head)}
+ pg.attributes.position.needsUpdate=true;pg.attributes.alpha.needsUpdate=true}
+
+/* ---------- labels ---------- */
+const lblBox=document.getElementById('labels');let labels=[];
+function setLabels(m){lblBox.innerHTML='';labels=[];
+ const add=(t,p,cls)=>{const d=document.createElement('div');d.className='lbl '+cls;d.textContent=t;lblBox.appendChild(d);labels.push({d,v:new THREE.Vector3(...p)})};
+ BASE_LABELS.forEach(([t,p])=>add(t,p,''));m.labels.forEach(([t,p])=>add(t,p,'m'));
+ [0,-2,-4,-6,-8].forEach(y=>add((y?y:'0')+' ม.',[8.3,y,Z],'tick'))}
+function updLabels(){const w=stage.clientWidth,h=stage.clientHeight;labels.forEach(l=>{const v=tmp.copy(l.v).project(camera);if(v.z>1||v.x<-1.1||v.x>1.1||v.y<-1.1||v.y>1.1){l.d.hidden=true;return}l.d.hidden=false;l.d.style.left=((v.x+1)/2*w)+'px';l.d.style.top=((1-v.y)/2*h)+'px'})}
+
+/* ---------- state + UI ---------- */
+let cur=0,head=0.6,playing=true,simT=0,fly=null;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const tabs=document.getElementById('tabs'),panel=document.getElementById('panel');
+M.forEach((m,i)=>{const b=document.createElement('button');b.type='button';b.className='tab';b.innerHTML='<span class="k">'+m.k+'</span>'+m.chip;b.onclick=()=>select(i);tabs.appendChild(b)});
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function renderPanel(m){
+ const fr=(lab,f)=>'<span class="pill '+f[0]+'">'+f[1]+'</span><div class="what"><b>'+lab+'</b>'+esc(f[2])+'</div>';
+ panel.innerHTML='<div class="ph"><div class="code">'+esc(m.code)+'</div><h2>'+esc(m.name)+'</h2><div class="en">'+esc(m.en)+'</div></div>'+
+ '<p>'+esc(m.principle)+'</p>'+
+ '<div class="sec"><h3>ผลต่อทางน้ำ</h3><div class="frow">'+fr('น้ำซึมผ่านตัวกำแพง',m.flow.wall)+fr('น้ำลอดใต้ฐานราก',m.flow.under)+'</div></div>'+
+ '<div class="sec"><h3>'+esc(m.stepsTitle)+'</h3><ol>'+m.steps.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol></div>'+
+ '<div class="cost"><h3 style="margin:0;font:600 12px/1.2 var(--f-body);letter-spacing:.06em;color:var(--muted)">ค่าใช้จ่ายโดยประมาณ</h3><div class="big">'+m.cost+'<small>'+m.cu+'</small></div><div class="sub">'+esc(m.unit)+(m.extra?' · '+esc(m.extra):'')+'</div></div>'+
+ (m.fit?'<div class="fit"><b>เหมาะกับ</b> '+esc(m.fit)+'</div>':'')+
+ '<div class="sec"><h3>มาตรฐานและคู่มืออ้างอิง</h3>'+glList(GL[m.id])+'</div>'+
+ '<div class="sec"><h3>ดูวัสดุและภาพงานจริง</h3>'+refList(m.refs)+'</div>';
+}
+function refList(r){return '<ul class="rlist">'+r.map(([t,u,n])=>'<li><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>').join('')+'</ul>'}
+function glList(r){return '<ul class="rlist">'+r.map(k=>{const[c,t,u,n]=GD[k];return '<li><span class="cd">'+esc(c)+'</span><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>'}).join('')+'</ul>'}
+document.getElementById('rgrid').innerHTML=M.map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+refList(m.refs)+'</div>').join('');
+document.getElementById('ggrid').innerHTML=M.map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+glList(GL[m.id])+'</div>').join('')+
+ '<div><h3><span class="k">TH</span>กฎหมายและมาตรฐานไทย</h3>'+glList(['tis1390','dpt','bca'])+'</div>';
+function select(i,instant){cur=i;const m=M[i];
+ [...tabs.children].forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
+ ['boil','ripple','urgent','A','B','C','D','E'].forEach(k=>G[k].visible=m.groups.includes(k));
+ G.old.visible=!m.hideOld;crack.visible=m.crack!=='none';crackM.color.set(m.crack==='sealed'?0xd6a21e:0x3a2e26);
+ buildParticles(m);setLabels(m);renderPanel(m);
+ document.querySelectorAll('.crow').forEach(r=>r.classList.toggle('on',r.dataset.m===m.id));
+ const to=[new THREE.Vector3(...m.cam[0]),new THREE.Vector3(...m.cam[1])];
+ if(instant||reduce){camera.position.copy(to[0]);controls.target.copy(to[1]);fly=null}else fly={from:[camera.position.clone(),controls.target.clone()],to,t:0};
+ try{history.replaceState(null,'','#'+m.id)}catch(e){}
+}
+
+// cost chart (log scale)
+const LO=300,HI=100000,lg=v=>(Math.log(v)-Math.log(LO))/(Math.log(HI)-Math.log(LO))*100;
+const fmt=v=>v>=1000?(v/1000)+'k':String(v);
+const CR=[['A อัดฉีดรอยร้าว','A',600,1500],['B ระบายใต้ดิน (ไม่รวมบ่อสูบ)','B',1500,3000],['C เข็มพืดคอนกรีต/ไวนิล','C',12000,25000],['D Jet grouting','D',21000,35000],['E กำแพง คสล. ใหม่','E',25000,50000],['C เข็มพืดเหล็กถาวร','C',32000,65000]];
+const cg=document.getElementById('cgrid');
+CR.forEach(([n,id,a,b])=>{const r=document.createElement('button');r.type='button';r.className='crow'+(id==='pkg'?' pkg':'');r.dataset.m=id;
+ r.innerHTML='<span class="n">'+n+'</span><span class="track"><span class="bar" style="left:'+lg(a)+'%;width:'+(lg(b)-lg(a))+'%"></span></span><span class="v">'+a.toLocaleString('en-US')+'–'+b.toLocaleString('en-US')+'</span>';
+ const mi=M.findIndex(m=>m.id===id);if(mi>=0)r.onclick=()=>{select(mi);stage.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'})};else r.style.cursor='default';cg.appendChild(r)});
+const ax=document.createElement('div');ax.className='axis';ax.innerHTML='<span></span><div class="t">'+[500,1000,3000,10000,30000,100000].map(v=>'<span style="left:'+lg(v)+'%">'+fmt(v)+'</span>').join('')+'</div><span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:right">บาท/ม.</span>';cg.appendChild(ax);
+
+document.getElementById('play').onclick=e=>{playing=!playing;e.target.textContent=playing?'หยุดการไหล':'เล่นการไหล'};
+document.getElementById('lblBtn').onclick=e=>{const off=lblBox.classList.toggle('off');e.target.textContent=off?'แสดงป้าย':'ซ่อนป้าย'};
+document.getElementById('reset').onclick=()=>select(cur);
+const hIn=document.getElementById('head'),hOut=document.getElementById('headOut');
+function setHead(v){head=v;hOut.textContent=v.toFixed(1)+' ม.';waterTop.scale.y=Math.max(.001,v);waterTop.position.y=v/2;
+ const g=M.find(m=>m.id==='problem');}
+hIn.oninput=()=>setHead(parseFloat(hIn.value));setHead(0.6);
+
+// theme-aware stage colour
+function themeBg(){const c=getComputedStyle(document.documentElement).getPropertyValue('--stage').trim()||'#e6eae4';scene.background=new THREE.Color(c)}
+themeBg();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',themeBg);
+new MutationObserver(themeBg).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+new ResizeObserver(resize).observe(stage);resize();
+
+const start=Math.max(0,M.findIndex(m=>m.id===location.hash.slice(1)));
+select(start,true);
+
+let last=performance.now();
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+ if(playing)simT+=dt;
+ if(fly){fly.t=Math.min(1,fly.t+dt/0.9);const e=fly.t<.5?2*fly.t*fly.t:1-Math.pow(-2*fly.t+2,2)/2;camera.position.lerpVectors(fly.from[0],fly.to[0],e);controls.target.lerpVectors(fly.from[1],fly.to[1],e);if(fly.t>=1)fly=null}
+ controls.update();updParticles(simT);
+ if(G.ripple.visible)ripples.forEach((r,i)=>{const s=((simT*0.6*(0.3+head)+i*.5)%1);r.scale.setScalar(1+s*2.2);r.material.opacity=.6*(1-s)*Math.min(1,head*2)});
+ renderer.render(scene,camera);updLabels();requestAnimationFrame(loop)}
+controls.addEventListener('start',()=>{fly=null});
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>
