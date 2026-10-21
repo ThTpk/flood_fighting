@@ -34,8 +34,15 @@ header{display:grid;gap:4px}
 .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
 h1{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.4vw,36px);line-height:1.15;margin:0;text-wrap:balance}
 .lede{margin:0;color:var(--muted);max-width:70ch}
-.tabs{display:flex;flex-wrap:wrap;gap:6px}
-.tab{font:500 14px/1.2 var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.tgroup{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px 12px;display:grid;gap:8px;align-content:start;min-width:0}
+.tg-h{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.tg-h b{font:600 15px/1.2 var(--f-display)}
+.tg-n{font-family:var(--f-mono);font-size:12px;color:var(--surface);background:var(--ink);border-radius:4px;padding:1px 6px}
+.tg-d{font-size:12.5px;color:var(--muted);flex-basis:100%}
+.tg-b{display:flex;flex-wrap:wrap;gap:6px}
+.tgroup.on{border-color:var(--accent)}
+.tab{font:500 14px/1.2 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
 .tab .k{font-family:var(--f-mono);font-size:12px;color:var(--muted);min-width:1ch}
 .tab:hover{border-color:var(--accent)}
 .tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
@@ -120,9 +127,9 @@ ol{margin:0;padding-left:1.3em;display:grid;gap:6px;font-size:14px}
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">น้ำซึมผ่านกำแพงและลอดใต้ฐานราก · Seepage &amp; underseepage repair</div>
+    <div class="eyebrow">กำแพงริมคลอง 3 กลุ่มปัญหา · Wall damage, underseepage &amp; open joints</div>
     <h1>ทางเลือกซ่อมกำแพงริมคลอง</h1>
-    <p class="lede">ภาพตัดขวางสามมิติของกำแพงริมคลองช่วงยาว 8 ม. เลือกวิธีด้านล่างเพื่อดูว่าแต่ละวิธีติดตั้งอะไร และทางเดินของน้ำเปลี่ยนไปอย่างไร ลากเพื่อหมุน เลื่อนล้อหรือบีบนิ้วเพื่อซูม</p>
+    <p class="lede">ภาพตัดขวางสามมิติของกำแพงริมคลองช่วงยาว 8 ม. แบ่งปัญหาเป็น 3 กลุ่ม แต่ละกลุ่มมีสภาพปัญหาและทางเลือกซ่อมของตัวเอง เลือกแท็บเพื่อดูว่าแต่ละวิธีติดตั้งอะไร และทางเดินของน้ำเปลี่ยนไปอย่างไร ลากเพื่อหมุน เลื่อนล้อหรือบีบนิ้วเพื่อซูม</p>
   </header>
 
   <nav class="tabs" id="tabs" aria-label="เลือกวิธี"></nav>
@@ -148,14 +155,20 @@ ol{margin:0;padding-left:1.3em;display:grid;gap:6px;font-size:14px}
   </div>
 
   <section class="costs">
-    <h2>เทียบค่าใช้จ่ายต่อความยาวกำแพง 1 เมตร</h2>
+    <h2>กลุ่ม 1 และ 2: ค่าใช้จ่ายต่อความยาวกำแพง 1 เมตร</h2>
     <div class="chart"><div class="cgrid" id="cgrid"></div></div>
     <p class="foot">ในทางปฏิบัติมักใช้หลายวิธีร่วมกัน เช่น ม่านกันซึม (C หรือ D) ในช่วงที่น้ำผุดรุนแรง ระบายใต้ดิน (B) เก็บน้ำส่วนที่ยังเล็ดลอด และอัดฉีด (A) เฉพาะจุดที่น้ำซึมผ่านตัวกำแพง ส่วนมาตรการเร่งด่วนและการสำรวจออกแบบเป็นค่าเหมาจ่าย จึงไม่อยู่ในกราฟนี้</p>
   </section>
 
+  <section class="costs">
+    <h2>กลุ่ม 3: ค่าใช้จ่ายต่อรอยต่อ 1 จุด</h2>
+    <div class="chart"><div class="cgrid" id="jgrid"></div></div>
+    <p class="foot">รอยต่อ 6–7 จุด ความยาวรอยต่อจุดละประมาณ 3–3.5 ม. (ยอดกำแพงถึงท้องคาน) ชุดที่แนะนำคือปิดเหนือดินด้วย F (หรือ G ถ้างบจำกัด) ร่วมกับปลั๊กใต้ดิน H รวม 7 จุดพร้อมค่าขนย้ายเครื่องจักร Jet grouting และหลุมทดสอบ ประมาณ 0.63–1.2 ล้านบาท (F+H) หรือ 0.56–1.1 ล้านบาท (G+H) ต่ำกว่าการทำม่านกันซึมตลอดแนวมาก ถ้าสำรวจแล้วพบว่าน้ำเข้าทางรอยต่อเป็นหลัก</p>
+  </section>
+
   <section class="costs refs">
     <h2>มาตรฐาน คู่มือ และกรณีศึกษา</h2>
-    <p class="foot">มาตรฐานและคู่มือใช้ประกอบการกำหนดวิธีทำงาน การตรวจรับ และการเขียน TOR ส่วนกรณีศึกษาเป็นรายงานวิจัยและบทความวิชาการที่บันทึกพฤติกรรมจริงของน้ำซึมและผลของวิธีแก้ ตรวจลิงก์ทุกรายการแล้วเมื่อ 12 ต.ค. 2569 มาตรฐาน ACI 224.1R, ACI 546R และ EN 12063 ไม่ได้ใส่ลิงก์ไว้ เพราะเปิดอ่านได้แค่บทคัดย่อหรือหน้าขายเท่านั้น</p>
+    <p class="foot">มาตรฐานและคู่มือใช้ประกอบการกำหนดวิธีทำงาน การตรวจรับ และการเขียน TOR ส่วนกรณีศึกษาเป็นรายงานวิจัยและบทความวิชาการที่บันทึกพฤติกรรมจริงของน้ำซึมและผลของวิธีแก้ ตรวจลิงก์ทุกรายการแล้ว (กลุ่ม 3 ตรวจเมื่อ 21 ต.ค. 2569) มาตรฐาน ACI 224.1R, ACI 546R, ACI 504R และ EN 12063 ไม่ได้ใส่ลิงก์ไว้ เพราะเปิดอ่านได้แค่บทคัดย่อหรือหน้าขายเท่านั้น</p>
     <div class="rgrid" id="ggrid"></div>
   </section>
 
@@ -181,21 +194,61 @@ const WALL=[[-2.9,0.45],[-2.2,0.42],[-1.95,0.38],[-1.85,0.15],[-1.82,0]];
 function cutX(path,xb){const out=[path[0]];for(let i=1;i<path.length;i++){const a=path[i-1],b=path[i];if((a[0]-xb)*(b[0]-xb)<=0&&a[0]!==b[0]){const t=(xb-a[0])/(b[0]-a[0]);out.push([xb,a[1]+t*(b[1]-a[1])]);return out}out.push(b)}return out}
 const f=(pts,end,w=1,sp=1)=>({pts,end,w,sp});
 const TIP=[[-7.8,-2],[-4.5,-5.6],[-1.3,-7.25],[0.6,-5.4],[1.4,-3]];
+const WALL2=[[-2.9,0.95],[-2.2,0.9],[-1.95,0.85],[-1.85,0.45],[-1.8,0]];
+const GW=0.1; // half-width of joint gap (shown ~20 cm)
+const JTOP=[[-6,0.55,0],[-2.25,0.55,0],[-1.9,0.5,0],[-1.3,0.03,0.08],[-0.4,0.02,0.45],[0.4,0.02,0.7]];
+const JTOP2=[[-6,1.0,0],[-2.25,1.0,0],[-1.9,0.95,0],[-1.5,0.03,-0.1],[-0.6,0.02,-0.5]];
+const JBEAM=[[-6,-1.05,0],[-3.2,-0.6,0],[-2.6,-0.4,0],[-1.6,-0.4,0],[-1.0,-0.25,0.15],[-0.55,0.02,0.35]];
+const JDEEP=[[-7,-2.3,0],[-4,-3.3,0],[-2.1,-3.0,0],[-1.3,-1.7,0.2],[-0.62,0.02,0.35]];
+function cut3(path,xb){const out=[path[0]];for(let i=1;i<path.length;i++){const a=path[i-1],b=path[i];if((a[0]-xb)*(b[0]-xb)<=0&&a[0]!==b[0]){const t=(xb-a[0])/(b[0]-a[0]);out.push([xb,a[1]+t*(b[1]-a[1]),a[2]+t*(b[2]-a[2])]);return out}out.push(b)}return out}
 
 /* ---------- methods ---------- */
 const M=[
-{id:'problem',k:'!',chip:'สภาพปัญหา',code:'สภาพปัจจุบัน',name:'น้ำซึมผ่านกำแพงและลอดใต้ฐาน',en:'Seepage + underseepage',
- principle:'ระดับน้ำในคลองสูงกว่าพื้นด้านในกำแพง แรงดันน้ำจึงดันน้ำผ่านรอยร้าวของกำแพง และลอดใต้ฐานรากผ่านชั้นดินที่น้ำซึมได้ ไปผุดขึ้นด้านใน ถ้าน้ำที่ผุดขุ่นและมีทราย แสดงว่าดินใต้ฐานถูกพาออก (Piping) ซึ่งทำให้เกิดโพรงและกำแพงทรุดได้',
- flow:{wall:['s-flow','ไหล','ซึมผ่านรอยร้าว'],under:['s-flow','ไหล','ลอดใต้ฐาน ผุดพร้อมทราย']},
+{id:'p1',grp:1,k:'!',chip:'สภาพปัญหา',code:'กลุ่ม 1 · สภาพปัญหา',name:'น้ำซึมผ่านรอยร้าวของตัวกำแพง',en:'Seepage through wall cracks',
+ principle:'กำแพงก่ออิฐหรือคอนกรีตบล็อกไม่ได้ออกแบบให้กันน้ำ เมื่อระดับน้ำคลองสูงกว่าพื้นด้านใน แรงดันน้ำจึงดันน้ำผ่านรอยร้าว รอยต่อปูนก่อ และผิวที่เสื่อมสภาพ รากไม้และการทรุดตัวไม่เท่ากันทำให้รอยร้าวขยาย ถ้ารอยร้าวกว้างขึ้นเรื่อย ๆ หรือกำแพงเอียง แสดงว่าโครงสร้างได้รับผลกระทบแล้ว',
+ flow:{wall:['s-flow','ไหล','ซึมผ่านรอยร้าวและรอยต่อปูนก่อ'],under:['s-managed','แยกพิจารณา','ดูกลุ่ม 2']},
+ stepsTitle:'สิ่งที่ต้องตรวจก่อนเลือกวิธี',
+ steps:['ทำผังรอยร้าวตลอดแนว ระบุตำแหน่ง ความยาว ความกว้าง และจุดที่มีน้ำไหล','ตรวจชนิดกำแพงว่าเป็นคอนกรีตเสริมเหล็กหรือก่ออิฐ ซึ่งกำหนดว่าซ่อมด้วยการอัดฉีดได้หรือต้องสร้างใหม่','ติดเกจวัดรอยร้าวที่รอยร้าวหลัก อ่านค่ารายเดือนเพื่อดูว่ายังขยายอยู่หรือไม่','วัดความเอียงของกำแพงแต่ละช่วง ช่วงที่เอียงหรือร้าวทะลุให้จัดเป็นระดับวิกฤต'],
+ cost:'180,000–450,000',cu:'บาท เหมาจ่าย',unit:'สำรวจ เจาะดิน และออกแบบ',extra:'ใช้ร่วมกันทั้ง 3 กลุ่ม',fit:null,
+ refs:[],
+ groups:[],crack:'open',
+ paths:[f(WALL,'pass',1,.7),f(WALL2,'pass',.8,.7)],
+ labels:[['น้ำซึมผ่านรอยร้าว',[-1.9,1.5,1.5]],['รอยร้าวและรอยต่อปูนก่อ',[-1.95,2.05,-1.2]]],
+ cam:[[4.8,3.4,10.2],[-2,0.4,0.6]]},
+{id:'A',grp:1,k:'A',chip:'อัดฉีดรอยร้าว',code:'กลุ่ม 1 · ทางเลือก A',name:'อัดฉีดกำแพงและอุดรอยร้าว',en:'PU / Epoxy crack injection',
+ principle:'ปิดทางน้ำที่ซึมผ่านตัวกำแพง โดยอัดพียูชนิดขยายตัวเมื่อโดนน้ำเข้าไปในรอยร้าว แล้วฉาบผิวด้านในด้วยวัสดุกันซึมที่ทนแรงดันน้ำจากด้านตรงข้าม',
+ flow:{wall:['s-stopped','หยุด','หยุดที่ตัวกำแพง'],under:['s-flow','ไหล','วิธีนี้แก้ไม่ได้ ดูกลุ่ม 2']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['สกัดเปิดรอยร้าว อุดจุดน้ำไหลแรงด้วยปูนอุดน้ำรั่วแห้งเร็ว (Hydraulic cement)','เจาะรูเอียงประมาณ 45° สลับซ้ายขวา ให้ตัดผ่านรอยร้าวกลางความหนากำแพง แล้วติดตั้งหัวอัดฉีด (Packer)','อัดพียูจากหัวต่ำสุดขึ้นไป จนวัสดุไหลออกที่หัวถัดไป รอยร้าวโครงสร้างที่แห้งแล้วใช้อีพ็อกซี่แทน','ถอดหัวอัดฉีด อุดรู แล้วฉาบกันซึมชนิดซีเมนต์หรือชนิดตกผลึกด้านใน'],
+ cost:'600–1,500',cu:'บาท/ม.',unit:'ถ้าซ่อมเฉพาะจุด ค่าใช้จ่ายลดลงตามสัดส่วน',extra:'ต้องซ่อมซ้ำเป็นระยะ',
+ refs:[['Packers and couplers help Nitofill PU stop every leak (Fosroc)','https://fosroc.com.au/news/packers-and-couplers-help-nitofill-pu-stop-every-leak','ขั้นตอนเจาะรู ติดหัวอัดฉีด และอัดพียูหยุดน้ำรั่วในรอยร้าวคอนกรีต'],['Nitofill Injection Packers TDS (Fosroc)','https://prod.fosroc.com.au/sites/default/files/products_file_storage/Fosroc_Nitofill_Injection_Packers_TDS.pdf','เอกสารข้อมูลหัวอัดฉีดแบบต่างๆ (PDF)'],['Crack injection hardware for basements (Adheseal)','https://adheseal.com.au/collections/crack-injection-hardware/basements','แคตตาล็อกหัวอัดฉีด อุปกรณ์อัด และเรซินพียู/อีพ็อกซี่'],['Hydraulic Cement (Rust-Oleum Concrete Saver)','https://www.rustoleum.com/product-catalog/industrial-brands/concrete-saver-pro/rebuild/hydraulic-cement','ปูนอุดน้ำรั่วแห้งเร็ว แข็งตัวใน 1–3 นาที ใช้อุดจุดน้ำไหล']],fit:'น้ำซึมผ่านตัวกำแพงอย่างเดียว ไม่มีน้ำผุดจากดิน ในกรณีนี้ใช้เสริมเฉพาะจุดร่วมกับวิธีอื่น',
+ groups:['A'],crack:'sealed',
+ paths:[f(cutX(WALL,-2.21),'blocked',1,.7),f(cutX(WALL2,-2.21),'blocked',.8,.7)],
+ labels:[['หัวอัดฉีด (Packer) เอียง 45°',[-1.8,1.95,1.5]],['ฉาบกันซึมด้านใน',[-1.85,0.75,-2.5]]],
+ cam:[[4.5,3.2,8.5],[-2,0.6,0.5]]},
+{id:'E',grp:1,k:'E',chip:'กำแพงใหม่',code:'กลุ่ม 1 · ทางเลือก E',name:'สร้างกำแพง คสล. ใหม่',en:'New RC retaining / flood wall',
+ principle:'รื้อกำแพงเดิมแล้วสร้างผนังคอนกรีตเสริมเหล็กบนฐานรากเสาเข็ม ออกแบบรับแรงดันน้ำ มีแผ่นกันซึม (Waterstop) ที่รอยต่อ และช่องระบายแรงดันด้านหลัง น้ำลอดใต้ฐานจะลดลงแค่ไหนขึ้นกับความลึกฐานและม่านกันซึมที่วิศวกรกำหนด',
+ flow:{wall:['s-stopped','หยุด','ผนังใหม่กันซึม'],under:['s-managed','ลดลง','ขึ้นกับความลึกฐานและม่านกันซึม']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['รื้อกำแพงเดิมทีละช่วง ทำรั้วชั่วคราวเพื่อความปลอดภัย','ตอกเสาเข็มคอนกรีต ทำฐานรากและผนัง คสล. สูงประมาณ 2.0–2.5 ม.','ติดแผ่นกันซึม (Waterstop) ที่รอยต่อ และทำชั้นกันซึมด้านคลอง','ทำช่องระบายแรงดันน้ำ (Weep hole) และระบบระบายหลังกำแพง'],
+ cost:'25,000–50,000',cu:'บาท/ม.',unit:'รวมเสาเข็ม',extra:'ค่าดูแลระยะยาวต่ำ',
+ refs:[['Sika Waterbar (Sika)','https://sgp.sika.com/en/construction/waterproofing/joints-waterproofing/sika-waterbar-o-dwallvn.html','แผ่นกันซึม PVC สำหรับรอยต่อขยายตัวของงานคอนกรีตกักเก็บน้ำและชั้นใต้ดิน'],['Polybit Polystop PVC waterstop TDS (Henkel)','https://datasheets.tdx.henkel.com/POLYBIT-Polystop-en_AE.pdf','รูปแบบหน้าตัด Waterstop และวิธีติดตั้ง (PDF)'],['Nippon PVC Waterstop TDS','https://professional.nipponpaint.com.my/downloads/tds-nippon-pvc-waterstop-2017-07.pdf','ขนาดและการต่อแผ่นกันซึม (PDF)']],fit:'ช่วงที่กำแพงเดิมเสียหายแล้ว หรือต้องการยกระดับป้องกันน้ำท่วมระยะยาว',
+ groups:['E'],crack:'none',hideOld:true,
+ paths:[f(U1,'boil',.45,.6),f(U2,'boil',.35,.6),f(cutX([[-3.3,-0.9],[-2.9,-1.0],[-1.4,-1.0]],-2.9),'blocked',.6),f(cutX(WALL,-2.32),'blocked',.7,.7)],
+ labels:[['ผนัง คสล. ใหม่ + Waterstop',[-2.1,2.85,1]],['ฐานรากบนเสาเข็ม',[-2.1,-0.95,Z]],['ช่องระบายแรงดัน (Weep hole)',[-1.9,0.75,-1]]],
+ cam:[[5.5,4,12],[-2,-1,1]]},
+{id:'p2',grp:2,k:'!',chip:'สภาพปัญหา',code:'กลุ่ม 2 · สภาพปัญหา',name:'น้ำลอดใต้ฐานรากและผุดจากดิน',en:'Underseepage and sand boils',
+ principle:'ชั้นดินใต้ฐานรากเป็นชั้นที่น้ำซึมผ่านได้ เมื่อน้ำคลองสูงกว่าพื้นด้านใน น้ำจึงลอดใต้ฐานไปผุดขึ้นที่พื้นดินด้านใน ถ้าน้ำที่ผุดขุ่นและพาทรายขึ้นมา (Sand boil) แสดงว่าดินใต้ฐานกำลังถูกกัดเซาะย้อนกลับเป็นทางน้ำ (Backward erosion piping) ซึ่งทำให้เกิดโพรงใต้ฐานและกำแพงทรุดได้ การซ่อมผิวกำแพงแก้ปัญหานี้ไม่ได้',
+ flow:{wall:['s-managed','แยกพิจารณา','ดูกลุ่ม 1'],under:['s-flow','ไหล','ลอดใต้ฐาน ผุดพร้อมทราย']},
  stepsTitle:'สิ่งที่ต้องทำก่อนเลือกวิธี',
  steps:['เดินสำรวจตลอดแนวกำแพง ระบุตำแหน่งจุดรั่วและจุดน้ำผุด พร้อมภาพถ่าย','บันทึกลักษณะน้ำที่ผุด ใสหรือขุ่น มีทรายหรือไม่ และปริมาณโดยประมาณ','วัดระดับน้ำคลองเทียบกับระดับดินด้านในในวันที่สำรวจ','ว่าจ้างวิศวกรเจาะสำรวจดิน 2–3 หลุม ลึก 15–20 ม. และออกแบบ'],
- cost:'180,000–450,000',cu:'บาท เหมาจ่าย',unit:'สำรวจ เจาะดิน และออกแบบ',extra:'จำเป็นทุกทางเลือก',fit:null,
+ cost:'180,000–450,000',cu:'บาท เหมาจ่าย',unit:'สำรวจ เจาะดิน และออกแบบ',extra:'ใช้ร่วมกันทั้ง 3 กลุ่ม',fit:null,
  refs:[['Sand boil (Wikipedia)','https://en.wikipedia.org/wiki/Sand_boil','กลไกการเกิดน้ำผุดพาทราย และความเสี่ยงต่อคันกั้นน้ำ'],['What is a sand boil? (Reclamation District 1000)','https://rd1000.org/what-is-a-sand-boil','ภาพจุดน้ำผุดหลังคันกั้นน้ำ และวิธีสังเกต']],
  groups:['boil','ripple'],crack:'open',
- paths:[f(U1,'boil'),f(U2,'boil',.8),f(SEAM,'boil',.6),f(WALL,'pass',.7,.7)],
- labels:[['น้ำลอดใต้ฐานราก (Underseepage)',[-1.2,-3.4,Z]],['น้ำซึมผ่านรอยร้าว',[-1.9,1.5,1.5]],['จุดน้ำผุดพาทรายขึ้นมา (Sand boil)',[1.5,0.25,3.6]]],
+ paths:[f(U1,'boil'),f(U2,'boil',.8),f(SEAM,'boil',.6)],
+ labels:[['น้ำลอดใต้ฐานราก (Underseepage)',[-1.2,-3.4,Z]],['จุดน้ำผุดพาทรายขึ้นมา (Sand boil)',[1.5,0.25,3.6]]],
  cam:[[6.5,4,15],[-0.5,-2,1]]},
-{id:'urgent',k:'0',chip:'เร่งด่วน',code:'มาตรการระยะสั้น',name:'มาตรการเร่งด่วน',en:'Emergency measures',
+{id:'urgent',grp:2,k:'0',chip:'เร่งด่วน',code:'กลุ่ม 2 · มาตรการระยะสั้น',name:'มาตรการเร่งด่วน',en:'Emergency measures',
  principle:'ลดแรงดันที่จุดน้ำผุดและพาน้ำออกจากพื้นที่ระหว่างรอการแก้ไขถาวร มาตรการนี้ไม่ได้ตัดทางน้ำใต้ดิน',
  flow:{wall:['s-managed','จัดการได้','ไหลลงรางชั่วคราว แล้วสูบออก'],under:['s-managed','ชะลอ','ยังไหล วงกระสอบทรายยกระดับน้ำในวงเพื่อลดแรงดันและหยุดการพาทราย']},
  stepsTitle:'ขั้นตอนหลัก',
@@ -206,20 +259,9 @@ const M=[
  paths:[f(U1,'boil',.7,.6),f(U2,'boil',.6,.6),f(SEAM.concat([[0.15,0.02]]),'drain',.6),f(WALL.concat([[0.15,0.02]]),'drain',.7,.7),f([[0.15,0.03,Z],[0.15,0.03,-3.3]],'drain',1.2,.9)],
  labels:[['วงกระสอบทราย (Ring dike)',[1.5,0.45,3.3]],['รางระบายชั่วคราว',[0.15,0.1,0.5]],['วาล์วกันน้ำย้อน',[-2.7,0.45,-2]],['เครื่องสูบน้ำ',[0.15,0.55,-3.6]]],
  cam:[[7,6,11],[-0.5,0,0]]},
-{id:'A',k:'A',chip:'อัดฉีดรอยร้าว',code:'ทางเลือก A',name:'อัดฉีดกำแพงและอุดรอยร้าว',en:'PU / Epoxy crack injection',
- principle:'ปิดทางน้ำที่ซึมผ่านตัวกำแพง โดยอัดพียูชนิดขยายตัวเมื่อโดนน้ำเข้าไปในรอยร้าว แล้วฉาบผิวด้านในด้วยวัสดุกันซึมที่ทนแรงดันน้ำจากด้านตรงข้าม',
- flow:{wall:['s-stopped','หยุด','หยุดที่ตัวกำแพง'],under:['s-flow','ไหล','ยังลอดใต้ฐาน วิธีนี้แก้ไม่ได้']},
- stepsTitle:'ขั้นตอนหลัก',
- steps:['สกัดเปิดรอยร้าว อุดจุดน้ำไหลแรงด้วยปูนอุดน้ำรั่วแห้งเร็ว (Hydraulic cement)','เจาะรูเอียงประมาณ 45° สลับซ้ายขวา ให้ตัดผ่านรอยร้าวกลางความหนากำแพง แล้วติดตั้งหัวอัดฉีด (Packer)','อัดพียูจากหัวต่ำสุดขึ้นไป จนวัสดุไหลออกที่หัวถัดไป รอยร้าวโครงสร้างที่แห้งแล้วใช้อีพ็อกซี่แทน','ถอดหัวอัดฉีด อุดรู แล้วฉาบกันซึมชนิดซีเมนต์หรือชนิดตกผลึกด้านใน'],
- cost:'600–1,500',cu:'บาท/ม.',unit:'ถ้าซ่อมเฉพาะจุด ค่าใช้จ่ายลดลงตามสัดส่วน',extra:'ต้องซ่อมซ้ำเป็นระยะ',
- refs:[['Packers and couplers help Nitofill PU stop every leak (Fosroc)','https://fosroc.com.au/news/packers-and-couplers-help-nitofill-pu-stop-every-leak','ขั้นตอนเจาะรู ติดหัวอัดฉีด และอัดพียูหยุดน้ำรั่วในรอยร้าวคอนกรีต'],['Nitofill Injection Packers TDS (Fosroc)','https://prod.fosroc.com.au/sites/default/files/products_file_storage/Fosroc_Nitofill_Injection_Packers_TDS.pdf','เอกสารข้อมูลหัวอัดฉีดแบบต่างๆ (PDF)'],['Crack injection hardware for basements (Adheseal)','https://adheseal.com.au/collections/crack-injection-hardware/basements','แคตตาล็อกหัวอัดฉีด อุปกรณ์อัด และเรซินพียู/อีพ็อกซี่'],['Hydraulic Cement (Rust-Oleum Concrete Saver)','https://www.rustoleum.com/product-catalog/industrial-brands/concrete-saver-pro/rebuild/hydraulic-cement','ปูนอุดน้ำรั่วแห้งเร็ว แข็งตัวใน 1–3 นาที ใช้อุดจุดน้ำไหล']],fit:'น้ำซึมผ่านตัวกำแพงอย่างเดียว ไม่มีน้ำผุดจากดิน ในกรณีนี้ใช้เสริมเฉพาะจุดร่วมกับวิธีอื่น',
- groups:['boil','ripple','A'],crack:'sealed',
- paths:[f(U1,'boil'),f(U2,'boil',.8),f(SEAM,'boil',.6),f(cutX(WALL,-2.21),'blocked',.7,.7)],
- labels:[['หัวอัดฉีด (Packer) เอียง 45°',[-1.8,1.95,1.5]],['ฉาบกันซึมด้านใน',[-1.85,0.75,-2.5]],['น้ำลอดใต้ฐานยังไหล',[-1.2,-3.4,Z]]],
- cam:[[4.5,3.2,8.5],[-2,0.6,0.5]]},
-{id:'B',k:'B',chip:'ระบายใต้ดิน',code:'ทางเลือก B',name:'ระบบระบายน้ำใต้ดินพร้อมบ่อสูบ',en:'Sub-drain + sump pump',
+{id:'B',grp:2,k:'B',chip:'ระบายใต้ดิน',code:'กลุ่ม 2 · ทางเลือก B',name:'ระบบระบายน้ำใต้ดินพร้อมบ่อสูบ',en:'Sub-drain + sump pump',
  principle:'ไม่ได้หยุดน้ำ แต่ดักน้ำที่ลอดใต้ฐานไว้ในร่องกรวดก่อนถึงผิวดิน แผ่นใยสังเคราะห์ทำหน้าที่กรองให้น้ำผ่านแต่ดินไม่ไหลตาม จากนั้นสูบน้ำกลับลงคลอง',
- flow:{wall:['s-flow','ไหล','ยังซึมผ่านรอยร้าว'],under:['s-managed','ดักไว้','ถูกดักเข้าท่อพรุน แล้วสูบออก']},
+ flow:{wall:['s-managed','แยกพิจารณา','ดูกลุ่ม 1'],under:['s-managed','ดักไว้','ถูกดักเข้าท่อพรุน แล้วสูบออก']},
  stepsTitle:'ขั้นตอนหลัก',
  steps:['ขุดร่องเป็นช่วงสั้นไม่เกินประมาณ 10 ม. ต่อครั้ง กว้าง 0.5 ม. ลึก 0.8–1.2 ม. ไม่ลึกกว่าฐานรากกำแพง','ปูแผ่นใยสังเคราะห์ (Geotextile) รองกรวด วางท่อพรุน HDPE/PVC 4–6 นิ้ว ลาดเอียงไปบ่อพัก','ถมกรวดล้างสะอาด พับแผ่นใยปิดทับ ถมดินและบดอัด','ทำบ่อพักทุก 30–40 ม. และบ่อสูบ 2–3 จุด พร้อมปั๊มลูกลอยและท่อส่งออกที่มีวาล์วกันย้อน'],
  cost:'1,500–3,000',cu:'บาท/ม.',unit:'บวกบ่อสูบพร้อมปั๊มและระบบไฟ จุดละประมาณ 70,000–220,000 บาท',extra:'มีค่าไฟและดูแลปั๊มต่อเนื่องทุกปี',fit:'น้ำซึมปานกลาง ฐานรากยังแข็งแรง มักใช้ร่วมกับ C หรือ D เพื่อเก็บน้ำส่วนที่ยังเล็ดลอด',
@@ -229,9 +271,9 @@ const M=[
    f([[0.9,-0.9,Z],[0.9,-0.9,-3]],'pass',1.4,.9),f([[0.9,-0.9,-3],[0.9,0.35,-3],[-1,0.35,-3],[-2,2.65,-3],[-2.6,2.65,-3],[-3,1,-3]],'drain',.9,.9)],
  labels:[['ร่องกรวดหุ้ม Geotextile',[0.9,-0.3,Z]],['ท่อพรุน 4–6 นิ้ว',[0.9,-0.75,1.5]],['บ่อสูบ + ปั๊มลูกลอย',[0.9,0.8,-3]],['ท่อส่งออก + วาล์วกันย้อน',[-2.3,2.8,-3]]],
  cam:[[7.5,5,10.5],[0,-0.5,-0.5]]},
-{id:'C',k:'C',chip:'เข็มพืด',code:'ทางเลือก C',name:'เข็มพืดกันซึม',en:'Sheet pile cut-off',
+{id:'C',grp:2,k:'C',chip:'เข็มพืด',code:'กลุ่ม 2 · ทางเลือก C',name:'เข็มพืดกันซึม',en:'Sheet pile cut-off',
  principle:'ตอกแผ่นเข็มพืดต่อกันเป็นม่านลงไปถึงชั้นดินเหนียวทึบน้ำ ตัดทางน้ำที่ลอดใต้ฐานรากโดยตรง น้ำที่เหลือต้องอ้อมใต้ปลายเข็มซึ่งยาวและผ่านดินทึบ ปริมาณจึงลดลงมาก',
- flow:{wall:['s-flow','ไหล','ยังซึมผ่านรอยร้าว ใช้ A ร่วม'],under:['s-stopped','ตัดแล้ว','เหลือซึมเล็กน้อยใต้ปลายเข็ม']},
+ flow:{wall:['s-managed','แยกพิจารณา','ดูกลุ่ม 1 (ใช้ A ร่วม)'],under:['s-stopped','ตัดแล้ว','เหลือซึมเล็กน้อยใต้ปลายเข็ม']},
  stepsTitle:'ขั้นตอนหลัก',
  steps:['สำรวจสาธารณูปโภคใต้ดินและแนวฐานรากเดิม เตรียมทางเข้าเครื่องจักร','ตอกด้วยเครื่องสั่น (Vibro hammer) ต่อเนื่องเป็นแนวเดียว ลึก 6–9 ม. ตามผลเจาะดิน','อุดรอยต่อเข็มพืด แล้วทำคานหัวเข็มคอนกรีตยึดกับกำแพงเดิม','เข็มพืดเหล็กถาวรต้องเคลือบกันสนิม หรือเลือกชนิดคอนกรีตอัดแรงหรือไวนิล'],
  cost:'12,000–25,000',cu:'บาท/ม.',unit:'เข็มพืดคอนกรีตอัดแรงหรือไวนิล',extra:'เหล็กถาวร 32,000–65,000 บาท/ม.',
@@ -240,9 +282,9 @@ const M=[
  paths:[f(cutX(U1,-1.46),'blocked'),f(cutX(U2,-1.46),'blocked',.8),f(cutX(SEAM,-1.46),'blocked',.6),f(TIP,'fade',.35,.35),f(WALL,'pass',.7,.7)],
  labels:[['เข็มพืด ลึก 6–9 ม. ถึงชั้นดินเหนียว',[-1.3,-4.2,Z]],['คานหัวเข็ม (Capping beam)',[-1.3,0.4,1.5]],['ซึมเล็กน้อยใต้ปลายเข็ม',[0.4,-6.4,Z]]],
  cam:[[5.5,2.2,14],[-1.3,-3.5,1]]},
-{id:'D',k:'D',chip:'Jet grouting',code:'ทางเลือก D',name:'ม่านอัดฉีดใต้ดิน',en:'Jet grouting curtain',
+{id:'D',grp:2,k:'D',chip:'Jet grouting',code:'กลุ่ม 2 · ทางเลือก D',name:'ม่านอัดฉีดใต้ดิน',en:'Jet grouting curtain',
  principle:'อัดน้ำปูนแรงดันสูงผสมกับดินเป็นเสาดินซีเมนต์ เรียงซ้อนทับกันเป็นผนังทึบน้ำใต้ดิน ทำได้ในพื้นที่แคบ และสั่นสะเทือนน้อยกว่าการตอกเข็มพืด จึงกระทบบ้านข้างเคียงน้อยกว่า',
- flow:{wall:['s-flow','ไหล','ยังซึมผ่านรอยร้าว ใช้ A ร่วม'],under:['s-stopped','ตัดแล้ว','ถูกตัดด้วยผนังดินซีเมนต์']},
+ flow:{wall:['s-managed','แยกพิจารณา','ดูกลุ่ม 1 (ใช้ A ร่วม)'],under:['s-stopped','ตัดแล้ว','ถูกตัดด้วยผนังดินซีเมนต์']},
  stepsTitle:'ขั้นตอนหลัก',
  steps:['เจาะนำ แล้วอัดฉีดน้ำปูนแรงดันสูงเป็นเสาดินซีเมนต์ Ø 0.6–0.8 ม.','จัดระยะให้เสาซ้อนทับกันเป็นผนังต่อเนื่อง ลึกประมาณ 6–9 ม. ชิดแนวกำแพงด้านใน','เก็บตัวอย่างเสาทดสอบกำลังอัดและการซึมผ่านน้ำ','จัดการน้ำโคลนจากการอัดฉีด และคืนสภาพผิวดิน'],
  cost:'21,000–35,000',cu:'บาท/ม.',unit:'อิงราคากลางกรมชลประทาน 2569',extra:'ผู้รับเหมาเอกชนงานเล็กมักสูงกว่า',
@@ -251,17 +293,50 @@ const M=[
  paths:[f(cutX(U1,-1.57),'blocked'),f(cutX(U2,-1.57),'blocked',.8),f(cutX(SEAM,-1.57),'blocked',.6),f(TIP,'fade',.3,.35),f(WALL,'pass',.7,.7)],
  labels:[['เสาดินซีเมนต์ Ø0.6–0.8 ม. ซ้อนทับกัน',[-1.2,-4.2,Z]],['ลึก 6–9 ม.',[-1.2,-7.1,2]]],
  cam:[[5.5,2.5,13.5],[-1.2,-3.5,0.5]]},
-{id:'E',k:'E',chip:'กำแพงใหม่',code:'ทางเลือก E',name:'สร้างกำแพง คสล. ใหม่',en:'New RC retaining / flood wall',
- principle:'รื้อกำแพงเดิมแล้วสร้างผนังคอนกรีตเสริมเหล็กบนฐานรากเสาเข็ม ออกแบบรับแรงดันน้ำ มีแผ่นกันซึม (Waterstop) ที่รอยต่อ และช่องระบายแรงดันด้านหลัง น้ำลอดใต้ฐานจะลดลงแค่ไหนขึ้นกับความลึกฐานและม่านกันซึมที่วิศวกรกำหนด',
- flow:{wall:['s-stopped','หยุด','ผนังใหม่กันซึม'],under:['s-managed','ลดลง','ขึ้นกับความลึกฐานและม่านกันซึม']},
+{id:'p3',grp:3,k:'!',chip:'สภาพปัญหา',code:'กลุ่ม 3 · สภาพปัญหา',name:'รอยต่อระหว่างกำแพงแต่ละช่วงเป็นทางน้ำ',en:'Open movement joints between wall panels',
+ principle:'กำแพงสร้างเป็นช่วง ๆ แต่ละช่วงตั้งบนคานและเสาเข็มของตัวเอง มีรอยต่อ 6–7 จุด กว้างประมาณ 10–15 ซม. ทั้งเหนือดินและที่ปลายคานใต้ดิน รอยต่อนี้มีไว้ให้แต่ละช่วงทรุดและขยับได้อิสระ การอุดด้วยอิฐฉาบปูนซึ่งแข็งและเปราะจึงร้าวทุกครั้งที่สองช่วงเคลื่อนต่างกัน น้ำคลองจึงไหลผ่านช่องเหนือดิน และไหลลัดผ่านช่องระหว่างปลายคานและระหว่างเสาเข็ม ซึ่งเป็นทางที่สั้นและซึมได้ง่ายกว่าแนวอื่น',
+ flow:{wall:['s-flow','ไหล','ผ่านช่องรอยต่อที่อิฐฉาบปูนแตกร้าว'],under:['s-flow','ไหล','ลัดผ่านช่องระหว่างปลายคานและเสาเข็ม ผุดใกล้รอยต่อ']},
+ stepsTitle:'สิ่งที่ต้องตรวจก่อนเลือกวิธี',
+ steps:['ระบุตำแหน่งรอยต่อทั้ง 6–7 จุด วัดความกว้างที่ระดับบน กลาง และล่าง','ติดเกจวัดหรือหมุดคร่อมรอยต่อ อ่านค่าทุกเดือนให้ครอบคลุมทั้งฤดูฝนและฤดูแล้ง เพื่อรู้ว่ารอยต่อยังขยับเท่าไร','สังเกตว่าน้ำเข้าทางช่องเหนือดิน ผุดจากดินข้างรอยต่อ หรือทั้งสองทาง','ขุดหลุมทดสอบข้างรอยต่ออย่างน้อย 1 จุด ดูความกว้างช่องระหว่างปลายคาน ความลึกคาน และระยะเสาเข็ม'],
+ cost:'20,000–40,000',cu:'บาท เหมาจ่าย',unit:'หลุมทดสอบ 1–2 จุด และเกจวัดรอยต่อ 7 จุด',extra:'ค่าวิศวกรรวมในงานสำรวจและออกแบบของโครงการ',fit:null,
+ refs:[],
+ groups:['joint','j0','jboil'],hideOld:true,xray:true,
+ paths:[f(JTOP,'pass',1,.8),f(JTOP2,'pass',.8,.8),f(JBEAM,'boil',1),f(JDEEP,'boil',.8)],
+ labels:[['รอยต่อกว้าง 10–15 ซม. อุดด้วยอิฐฉาบปูน (แตกร้าว)',[-2.05,2.7,0]],['ช่องระหว่างปลายคาน',[-2.05,-0.25,0.02]],['เสาเข็มแยกกันแต่ละช่วง',[-2.08,-4.6,-0.85]],['น้ำผุดใกล้รอยต่อ',[-0.6,0.3,0.4]]],
+ cam:[[6.2,3.6,9.6],[-1.8,-1.5,0]]},
+{id:'F',grp:3,k:'F',chip:'แถบยางยึดอีพ็อกซี่',code:'กลุ่ม 3 · ทางเลือก F',name:'ปิดรอยต่อด้วยแถบยางยึดอีพ็อกซี่',en:'Bonded flexible joint strip (FPO tape + epoxy)',
+ principle:'รื้ออิฐฉาบปูนออก อุดแกนรอยต่อด้วยโฟมแข็งหรือยาแนวเพื่อรองรับ แล้วติดแถบยางยืดหยุ่นกว้าง 20–30 ซม. คร่อมรอยต่อด้วยกาวอีพ็อกซี่ทั้งสองฝั่ง ตรงกลางแถบไม่ยึดติดจึงยืดหดตามการขยับของกำแพงได้ ระบบนี้ใช้กับโครงสร้างกักเก็บน้ำ ติดฝั่งคลองซึ่งเป็นฝั่งที่น้ำดันเข้าได้ผลดีที่สุด ถ้าต้องติดด้านใน ต้องมีแผ่นเหล็กยึดทับเพื่อรับแรงดันน้ำ',
+ flow:{wall:['s-stopped','หยุด','แถบยางปิดช่องตั้งแต่ยอดกำแพงถึงท้องคาน'],under:['s-flow','ไหล','ยังลัดผ่านใต้ท้องคานและระหว่างเสาเข็ม ใช้ H ร่วม']},
  stepsTitle:'ขั้นตอนหลัก',
- steps:['รื้อกำแพงเดิมทีละช่วง ทำรั้วชั่วคราวเพื่อความปลอดภัย','ตอกเสาเข็มคอนกรีต ทำฐานรากและผนัง คสล. สูงประมาณ 2.0–2.5 ม.','ติดแผ่นกันซึม (Waterstop) ที่รอยต่อ และทำชั้นกันซึมด้านคลอง','ทำช่องระบายแรงดันน้ำ (Weep hole) และระบบระบายหลังกำแพง'],
- cost:'25,000–50,000',cu:'บาท/ม.',unit:'รวมเสาเข็ม',extra:'ค่าดูแลระยะยาวต่ำ',
- refs:[['Sika Waterbar (Sika)','https://sgp.sika.com/en/construction/waterproofing/joints-waterproofing/sika-waterbar-o-dwallvn.html','แผ่นกันซึม PVC สำหรับรอยต่อขยายตัวของงานคอนกรีตกักเก็บน้ำและชั้นใต้ดิน'],['Polybit Polystop PVC waterstop TDS (Henkel)','https://datasheets.tdx.henkel.com/POLYBIT-Polystop-en_AE.pdf','รูปแบบหน้าตัด Waterstop และวิธีติดตั้ง (PDF)'],['Nippon PVC Waterstop TDS','https://professional.nipponpaint.com.my/downloads/tds-nippon-pvc-waterstop-2017-07.pdf','ขนาดและการต่อแผ่นกันซึม (PDF)']],fit:'ช่วงที่กำแพงเดิมเสียหายแล้ว หรือต้องการยกระดับป้องกันน้ำท่วมระยะยาว',
- groups:['E'],crack:'none',hideOld:true,
- paths:[f(U1,'boil',.45,.6),f(U2,'boil',.35,.6),f(cutX([[-3.3,-0.9],[-2.9,-1.0],[-1.4,-1.0]],-2.9),'blocked',.6),f(cutX(WALL,-2.32),'blocked',.7,.7)],
- labels:[['ผนัง คสล. ใหม่ + Waterstop',[-2.1,2.85,1]],['ฐานรากบนเสาเข็ม',[-2.1,-0.95,Z]],['ช่องระบายแรงดัน (Weep hole)',[-1.9,0.75,-1]]],
- cam:[[5.5,4,12],[-2,-1,1]]}
+ steps:['กั้นน้ำชั่วคราวฝั่งคลองเฉพาะจุด สูบน้ำออก และขุดเปิดถึงท้องคาน','รื้ออิฐและปูนฉาบในช่องออก ขัดผิวคอนกรีตสองข้างรอยต่อกว้างข้างละ 10–15 ซม. ให้สะอาดและแห้ง','อุดแกนรอยต่อด้วยโฟมแข็งหรือโฟมเส้น (Backer rod) กับยาแนว PU เพื่อรองรับแถบยางจากแรงดันน้ำ','ทากาวอีพ็อกซี่ วางแถบยาง กดรีดให้แนบ แล้วทากาวทับขอบ ส่วนกลางแถบเว้นไม่ทากาวให้ยืดหดได้ ต่อแถบด้วยการเชื่อมความร้อนตามคู่มือผู้ผลิต'],
+ cost:'20,000–45,000',cu:'บาท/จุด',unit:'รวมกั้นน้ำชั่วคราวและขุดเปิด รอยต่อยาวจุดละประมาณ 3–3.5 ม.',extra:'7 จุด ≈ 0.14–0.32 ล้านบาท',
+ refs:[['Sikadur-Combiflex SG-20 M (Sika ประเทศไทย)','https://tha.sika.com/th/construction/waterproofing-systems/joint-waterproofing/sikadur-combiflexsg-20m.html','หน้าผลิตภัณฑ์ภาษาไทย แถบกว้าง 15–30 ซม. ม้วนละ 25 ม. ใช้ปิดรอยต่อที่เคลื่อนตัวในงานใต้ดินและถังเก็บน้ำ'],['Sikadur-Combiflex SG System (Product Data Sheet)','https://aus.sika.com/dam/dms/au01/u/sikadur-combiflexsgsystem.pdf','ขั้นตอนติดตั้ง การรับการเคลื่อนตัว และการรองรับแรงดันน้ำด้านบวกและด้านลบ (PDF)']],fit:'รอยต่อที่ยังขยับและต้องรับแรงดันน้ำ เป็นวิธีปิดรอยต่อเหนือดินที่ทนที่สุดในกลุ่มนี้',
+ groups:['joint','jF','jboil'],hideOld:true,xray:true,
+ paths:[f(cut3(JTOP,-2.24),'blocked',1,.8),f(cut3(JTOP2,-2.24),'blocked',.8,.8),f(JBEAM,'boil',1),f(JDEEP,'boil',.8)],
+ labels:[['แถบยาง FPO ยึดอีพ็อกซี่ ฝั่งคลอง',[-2.25,2.75,0]],['โฟมแข็งรองรับในช่อง',[-1.95,1.6,0]],['น้ำใต้ดินยังลัดใต้ท้องคาน',[-1.2,-1.3,0.2]]],
+ cam:[[-10.2,3.6,7.2],[-2.1,0.2,0]]},
+{id:'G',grp:3,k:'G',chip:'ไส้ยืดหยุ่น + แผ่นปิด',code:'กลุ่ม 3 · ทางเลือก G',name:'อุดแกนด้วยวัสดุยืดหยุ่นและปิดด้วยแผ่นปิดรอยต่อ',en:'Preformed joint filler + cover plates + sealant',
+ principle:'ยาแนวทั่วไปรับรอยต่อกว้างได้ไม่เกินประมาณ 4 ซม. ช่อง 10–15 ซม. จึงใช้ยาแนวปิดตรง ๆ ไม่ได้ วิธีนี้อัดแผ่นอุดรอยต่อชนิดยางฟองน้ำหรือ PVC เต็มช่อง แล้วปิดหน้าทั้งสองฝั่งด้วยแผ่นสแตนเลสหรือ HDPE ที่รองด้วยแผ่นยาง ยึดพุกฝั่งเดียว อีกฝั่งปล่อยให้เลื่อน ยาแนวใช้เฉพาะตามขอบแผ่นซึ่งแคบ ราคาถูกและทำง่ายกว่า F แต่ทนแรงดันน้ำได้น้อยกว่า',
+ flow:{wall:['s-managed','ลดลง','กันได้ดีเมื่อแรงดันต่ำ อาจซึมที่ขอบแผ่นเมื่อน้ำคลองสูง'],under:['s-flow','ไหล','ยังลัดผ่านใต้ท้องคาน ใช้ H ร่วม']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['รื้ออิฐและปูนฉาบในช่องออก ทำความสะอาดหน้าคอนกรีต','อัดแผ่นอุดรอยต่อชนิดยางฟองน้ำหรือ PVC (Preformed joint filler) เต็มช่อง ตั้งแต่ท้องคานถึงยอดกำแพง','ติดแผ่นปิดรอยต่อกว้างประมาณ 30 ซม. ทั้งสองฝั่ง รองด้วยแผ่นยาง EPDM ยึดพุกฝั่งเดียว อีกฝั่งเจาะรูยาวให้เลื่อนได้','ยาแนว PU ตามขอบแผ่น และตรวจซ่อมยาแนวทุก 3–5 ปี'],
+ cost:'10,000–25,000',cu:'บาท/จุด',unit:'วัสดุและค่าแรง รอยต่อยาวจุดละประมาณ 3–3.5 ม.',extra:'7 จุด ≈ 0.07–0.18 ล้านบาท',
+ refs:[['Sikaflex PRO-3 (Product Data Sheet)','https://industry.sika.com/dam/dms/pa01/o/sikaflex-pro-3.pdf','ยาแนว PU สำหรับรอยต่อที่เคลื่อนตัวและแช่น้ำ รับรอยต่อกว้าง 10–40 มม. เท่านั้น (PDF)']],fit:'งบจำกัด หรือแรงดันน้ำไม่สูง ใช้เป็นชั้นปิดด้านในร่วมกับ F ได้',
+ groups:['joint','jG','jboil'],hideOld:true,xray:true,
+ paths:[f(cut3(JTOP,-2.22),'blocked',1,.8),f(JTOP2.slice(0,2).concat([[-2.0,0.97,0],[-1.92,0.6,0.16],[-1.4,0.03,0.25]]),'pass',.35,.5),f(JBEAM,'boil',1),f(JDEEP,'boil',.8)],
+ labels:[['ไส้วัสดุยืดหยุ่น (Joint filler)',[-2.05,2.7,0]],['แผ่นปิดรอยต่อ + ยาแนวขอบ',[-1.92,1.75,0.2]],['ซึมเล็กน้อยที่ขอบแผ่นเมื่อน้ำสูง',[-1.6,0.55,0.4]]],
+ cam:[[5.4,3.2,8.4],[-1.9,0.3,0]]},
+{id:'H',grp:3,k:'H',chip:'ปลั๊กใต้ดิน',code:'กลุ่ม 3 · ทางเลือก H',name:'ม่านกันซึมเฉพาะจุดใต้รอยต่อ',en:'Local jet-grout plug / chemical grouting at joints',
+ principle:'ทำเสาดินซีเมนต์ด้วย Jet grouting 3 ต้นต่อจุด ต้นกลางอยู่ในช่องระหว่างปลายคาน อีกสองต้นอยู่ใต้ปลายคานทั้งสองฝั่ง ซ้อนทับกันเป็นปลั๊กทึบน้ำลึกถึงชั้นดินเหนียว ปิดทางลัดใต้ดินที่รอยต่อโดยไม่ต้องทำม่านกันซึมตลอดแนว ถ้าชั้นดินเป็นทรายและงบจำกัด ใช้การอัดฉีดเคมี (PU หรืออะคริลิก) ลงดินรอบช่องแทนได้ แต่ทนน้อยกว่า',
+ flow:{wall:['s-flow','ไหล','ช่องเหนือดินต้องปิดด้วย F หรือ G ร่วม'],under:['s-stopped','ตัดแล้ว','เสาดินซีเมนต์ปิดช่องใต้ดินที่รอยต่อ']},
+ stepsTitle:'ขั้นตอนหลัก',
+ steps:['ใช้ผลหลุมทดสอบและผลเจาะดินกำหนดความลึกและตำแหน่งเสา','เจาะนำในช่องรอยต่อและข้างปลายคาน ทำเสาดินซีเมนต์ Ø 0.6–0.8 ม. 3 ต้นต่อจุด ลึกประมาณ 6–9 ม.','เฝ้าระวังการยกตัวของคานและกำแพงระหว่างอัดฉีด และจัดการน้ำโคลนไม่ให้ลงคลอง','ทางเลือกงบต่ำ: อัดฉีด PU หรืออะคริลิกลงดินผ่านท่ออัดฉีดรอบช่อง ใช้ได้ดีในดินทราย ไม่เหมาะกับดินเหนียว'],
+ cost:'45,000–80,000',cu:'บาท/จุด',unit:'Jet grouting 3 ต้น ลึก 8 ม. อิงราคากลางกรมชลประทาน 2569 รวมค่าดำเนินการ',extra:'ค่าขนย้ายเครื่องจักร 150,000–300,000 บาท ครั้งเดียว · 7 จุดรวม ≈ 0.47–0.86 ล้านบาท · อัดฉีดเคมีประมาณ 20,000–60,000 บาท/จุด',
+ refs:[['Jet grouting brochure (Keller UK)','https://www.keller.co.uk/sites/keller-uk/files/2019-03/jet-grouting-brochure-keller-uk.pdf','หลักการ Soilcrete การฉีดตัดดินผสมซีเมนต์เป็นเสาทึบน้ำ (PDF)']],fit:'น้ำผุดกระจุกใกล้รอยต่อ หรือหลุมทดสอบพบช่องใต้ดินเปิดอยู่ ประหยัดกว่าทำม่านกันซึมตลอดแนวมาก',
+ groups:['joint','jH','jboil'],hideOld:true,xray:true,
+ paths:[f(JTOP,'pass',.7,.8),f(cut3(JBEAM,-2.42),'blocked',1),f(cut3(JDEEP,-2.42),'blocked',.8),f([[-7.8,-2.3,0],[-4,-5.8,0],[-2.1,-7.25,0],[-0.9,-5.6,0.2],[-0.6,-3,0.35]],'fade',.3,.35)],
+ labels:[['เสาดินซีเมนต์ 3 ต้นคร่อมช่องรอยต่อ',[-2.08,-3.4,0]],['ลึกถึงชั้นดินเหนียว',[-2.08,-6.75,0.7]],['เหนือดินต้องปิดด้วย F หรือ G',[-2.05,2.7,0]]],
+ cam:[[6.8,1.8,10.4],[-1.9,-2.9,0]]}
 ];
 /* ---------- guideline references (from the solution report) ---------- */
 const GD={
@@ -283,11 +358,15 @@ const GD={
  sph2024:['Frontiers in Earth Science 2024','Numerical simulation of cut-off walls by high-pressure jet grouting based on SPH','https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1491583/full','Liu และคณะ จำลองการสร้างม่านกันซึมด้วย Jet grouting และเทียบกับผลทดสอบภาคสนามในมณฑลเจียงซี',1],
  ucdavis:['UC Davis GPA','Jet Grouting (Geotechnical Professional Activities)','https://research.engineering.ucdavis.edu/gpa/ground-improvement/jet-grouting/','กลไก ระบบท่อคู่และสามท่อ และกรณีศึกษาคันกั้นน้ำ Stockton ปี 1999',1],
  thai2011:['วิศวกรรมสาร มก.','ความเสี่ยงเชิงวิศวกรรมและเศรษฐศาสตร์ของกำแพงป้องกันน้ำท่วมที่ก่อสร้างหลังปี พ.ศ. 2554','https://ph01.tci-thaijo.org/index.php/kuengj/article/download/146039/107730/390282','อานุภาพภราดร และ ศรลัมพ์ วิเคราะห์ความเสี่ยงและต้นทุนตลอดอายุของ I-wall และคันดินในไทย (PDF)',1],
+ c920:['ASTM C920','Standard Specification for Elastomeric Joint Sealants','https://store.astm.org/c0920-18.html','ชั้นคุณภาพยาแนวตามความสามารถรับการเคลื่อนตัว (Class 12.5 ถึง 100/50) ใช้ระบุสเปกยาแนวใน TOR (ฉบับเต็มต้องซื้อ)'],
+ c1193:['ASTM C1193','Standard Guide for Use of Joint Sealants','https://store.astm.org/c1193-16.html','แนวทางเลือกและติดตั้งยาแนวชนิดเหลว รวมถึงวัสดุรองหลังยาแนว (ฉบับเต็มต้องซื้อ)'],
+ d1752:['ASTM D1752','Preformed Sponge Rubber, Cork and Recycled PVC Expansion Joint Fillers','https://store.astm.org/d1752-18.html','สเปกแผ่นอุดรอยต่อขยายตัวชนิดยางฟองน้ำ ไม้ก๊อก และ PVC สำหรับงานคอนกรีตและงานก่อ (ฉบับเต็มต้องซื้อ)'],
+ em3500:['USACE EM 1110-1-3500','Chemical Grouting (1995)','https://www.tugraz.at/fileadmin/user_upload/Institute/IAG/Files/09_Chemical_Grouting-USACE.pdf','ชนิดสารอัดฉีด (ซิลิเกต อะคริเลต ยูรีเทน) และความเหมาะสมตามชนิดดิน ใช้ตัดน้ำซึมในชั้นทราย (PDF)'],
  tis1390:['มอก. 1390-2566','เข็มพืดเหล็กรีดร้อน (สมอ.)','https://service.tisi.go.th/fulltext/TIS1390-2566.pdf','หน้าตัด เกรดเหล็ก เกณฑ์ความคลาดเคลื่อน และการทดสอบ ใช้ตรวจรับเข็มพืดเหล็ก (PDF)'],
  dpt:['กรมโยธาธิการฯ','แบบงานเขื่อนป้องกันตลิ่ง','https://www.yotathai.com/yotanews/river-bank-protection','เอกสาร 17 หน้าเรื่องการเขียนแบบเขื่อนป้องกันตลิ่ง จัดทำโดยกรมโยธาธิการและผังเมือง (PDF)'],
  bca:['พ.ร.บ.ควบคุมอาคาร 2522','รั้วและกำแพงตามกฎหมายควบคุมอาคาร','https://www.nakhoncity.org/law/pdf/law060268.pdf','รั้วหรือกำแพงที่ติดที่สาธารณะถือเป็นอาคาร ต้องขออนุญาตก่อสร้าง (PDF)']
 };
-const GL={problem:['fema1032','em1901','em1913','po2021','erdc2020','iwall'],urgent:['ffh','fema1032','em1913'],A:['usbr2398'],B:['em1913','fema484','em1901','ced','erdc2020'],C:['aph','em2504','tis1390','laronge'],D:['en12716','sph2024','ucdavis','laronge'],E:['em2102','iwall','thai2011','dpt','bca']};
+const GL={p1:['usbr2398','iwall'],p2:['fema1032','em1901','em1913','po2021','erdc2020','iwall'],p3:['em2102','iwall','fema1032'],F:['em2102','c1193'],G:['c920','c1193','d1752','em2102'],H:['en12716','em3500','sph2024'],urgent:['ffh','fema1032','em1913'],A:['usbr2398'],B:['em1913','fema484','em1901','ced','erdc2020'],C:['aph','em2504','tis1390','laronge'],D:['en12716','sph2024','ucdavis','laronge'],E:['em2102','iwall','thai2011','dpt','bca']};
 const BASE_LABELS=[['คลอง',[-6.5,1.3,1.5]],['พื้นที่ด้านใน',[5.8,2.9,-1]],['ชั้นดินที่น้ำซึมผ่านได้',[4.6,-3.2,Z]],['ชั้นดินเหนียวทึบน้ำ',[4.6,-7.1,Z]]];
 
 /* ---------- three.js scene ---------- */
@@ -308,11 +387,12 @@ const sun=new THREE.DirectionalLight(0xffffff,0.75);sun.position.set(6,12,9);sce
 const mat=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.9,metalness:0},o));
 const box=(x0,x1,y0,y1,z0,z1,m)=>{const g=new THREE.BoxGeometry(x1-x0,y1-y0,z1-z0);const me=new THREE.Mesh(g,m);me.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);return me};
 function extrude(pts,m,z0=-4,z1=4){const s=new THREE.Shape();pts.forEach((p,i)=>i?s.lineTo(p[0],p[1]):s.moveTo(p[0],p[1]));const g=new THREE.ExtrudeGeometry(s,{depth:z1-z0,bevelEnabled:false});g.translate(0,0,z0);return new THREE.Mesh(g,m)}
-const G={};['base','old','boil','ripple','urgent','A','B','C','D','E'].forEach(k=>{G[k]=new THREE.Group();scene.add(G[k])});
+const G={};['base','old','boil','ripple','urgent','A','B','C','D','E','joint','j0','jF','jG','jH','jboil'].forEach(k=>{G[k]=new THREE.Group();scene.add(G[k])});
 
 // soil strata
-G.base.add(extrude([[-9,-8],[8,-8],[8,-6.5],[-9,-6.5]],mat(0x7c6a57)));
-G.base.add(extrude([[-9,-6.5],[8,-6.5],[8,0],[-2.2,0],[-4.5,-2],[-9,-2]],mat(0xb48d5c)));
+const soilMats=[mat(0x7c6a57),mat(0xb48d5c)];
+G.base.add(extrude([[-9,-8],[8,-8],[8,-6.5],[-9,-6.5]],soilMats[0]));
+G.base.add(extrude([[-9,-6.5],[8,-6.5],[8,0],[-2.2,0],[-4.5,-2],[-9,-2]],soilMats[1]));
 G.base.add(box(-1.95,8,0,0.015,-4,4,mat(0x7f9a5c))); // lawn
 // canal water
 const waterM=mat(0x2f86ab,{transparent:true,opacity:.5,roughness:.3});
@@ -385,6 +465,34 @@ G.E.add(box(-2.32,-2.3,-.6,2.6,-4,4,mat(0x23344a)));
 [-2.55,-1.65].forEach(x=>[-3,-1,1,3].forEach(z=>{const p=new THREE.Mesh(new THREE.CylinderGeometry(.15,.15,5.5,14),rcM);p.position.set(x,-4.05,z);G.E.add(p)}));
 [-3,-1,1,3].forEach(z=>{const w=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,.37,10),mat(0x1d2226));w.rotation.z=Math.PI/2;w.position.set(-2.12,.45,z);G.E.add(w)});
 
+// ---- group 3: segmented wall with open joint at z=0
+const wallM=mat(0xc8c1b3),ftgM=mat(0x9fa39d),pileM=mat(0x8d918b);
+G.joint.add(box(-2.2,-1.95,0,2.4,-4,-GW,wallM));G.joint.add(box(-2.2,-1.95,0,2.4,GW,4,wallM));
+G.joint.add(box(-2.55,-1.6,-0.8,0,-4,-GW,ftgM));G.joint.add(box(-2.55,-1.6,-0.8,0,GW,4.02,ftgM));
+[-3.3,-2.0,-0.75,0.75,2.0,3.3].forEach(z=>{const c=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,5.5,14),pileM);c.position.set(-2.08,-3.55,z);G.joint.add(c)});
+// j0: brick + plaster infill, cracked along both edges
+G.j0.add(box(-2.2,-1.95,0,2.4,-GW+.01,GW-.01,mat(0xa5533c)));
+const jcM=new THREE.LineBasicMaterial({color:0x2a1d16});
+[-GW+.012,GW-.012].forEach((z,k)=>{const pts=[];for(let y=0;y<=2.4;y+=0.2)pts.push(new THREE.Vector3(-1.944,y,z+(k?-1:1)*((y*7)%2>1?.012:0)));G.j0.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),jcM))});
+G.j0.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([[0.5,-.06],[0.9,.04],[1.3,-.03],[1.7,.05]].map(p=>new THREE.Vector3(-1.944,p[0],p[1]))),jcM));
+// jF: bonded FPO strip on canal face + hard-foam support in gap
+const foamM=mat(0xe6d98f);
+G.jF.add(box(-2.2,-1.95,-0.8,2.4,-GW+.005,GW-.005,foamM));
+G.jF.add(box(-2.228,-2.2,-0.8,2.4,-0.3,0.3,mat(0x4a5157,{roughness:.6})));
+G.jF.add(box(-2.232,-2.228,-0.8,2.4,-0.1,0.1,mat(0x8f969c,{roughness:.5})));
+// jG: preformed filler + cover plates both faces + sealant edges
+G.jG.add(box(-2.2,-1.95,-0.8,2.4,-GW+.005,GW-.005,mat(0x6f6658)));
+const plateM=mat(0xb8c0c6,{metalness:.6,roughness:.35}),sealM=mat(0x2b2f33);
+[[-1.95,-1.935],[-2.215,-2.2]].forEach(([a,b])=>{G.jG.add(box(a,b,0,2.4,-0.16,0.16,plateM));
+ [-0.16,0.16].forEach(z=>G.jG.add(box(Math.min(a,b)-.004,Math.max(a,b)+.004,0,2.4,z-.012,z+.012,sealM)))});
+// jH: jet-grout plug, 3 overlapping columns
+const jgM=mat(0xc9c2ae);
+{const c=new THREE.Mesh(new THREE.CylinderGeometry(.3,.3,6.6,22),jgM);c.position.set(-2.08,-3.3,0);G.jH.add(c);}
+[-0.42,0.42].forEach(z=>{const c=new THREE.Mesh(new THREE.CylinderGeometry(.3,.3,5.8,22),jgM);c.position.set(-2.08,-3.7,z);G.jH.add(c)});
+G.jH.add(box(-2.2,-1.95,-0.8,2.4,-GW+.005,GW-.005,mat(0x6f6658)));
+// boil next to joint
+{const c=new THREE.Mesh(new THREE.ConeGeometry(.3,.12,20),sandM);c.position.set(-0.6,.06,0.38);G.jboil.add(c);}
+
 /* ---------- particles ---------- */
 const MAX=900;
 const pg=new THREE.BufferGeometry();
@@ -417,7 +525,12 @@ function updLabels(){const w=stage.clientWidth,h=stage.clientHeight;labels.forEa
 let cur=0,head=0.6,playing=true,simT=0,fly=null;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const tabs=document.getElementById('tabs'),panel=document.getElementById('panel');
-M.forEach((m,i)=>{const b=document.createElement('button');b.type='button';b.className='tab';b.innerHTML='<span class="k">'+m.k+'</span>'+m.chip;b.onclick=()=>select(i);tabs.appendChild(b)});
+const GROUPS=[{n:1,t:'กำแพงเสียหาย',d:'น้ำซึมผ่านรอยร้าวและรอยต่อปูนก่อของตัวกำแพง'},{n:2,t:'น้ำผุดจากใต้ดิน',d:'น้ำลอดใต้ฐานรากแล้วผุดขึ้นพาทราย'},{n:3,t:'รอยต่อกำแพง',d:'ช่องกว้าง 10–15 ซม. ระหว่างกำแพงแต่ละช่วง 6–7 จุด ทั้งเหนือดินและใต้ดิน'}];
+GROUPS.forEach(g=>{const w=document.createElement('div');w.className='tgroup';w.dataset.g=g.n;
+ w.innerHTML='<div class="tg-h"><span class="tg-n">กลุ่ม '+g.n+'</span><b>'+g.t+'</b><span class="tg-d">'+g.d+'</span></div><div class="tg-b"></div>';
+ const bx=w.querySelector('.tg-b');
+ M.forEach((m,i)=>{if(m.grp!==g.n)return;const b=document.createElement('button');b.type='button';b.className='tab';b.dataset.i=i;b.innerHTML='<span class="k">'+m.k+'</span>'+m.chip;b.onclick=()=>select(i);bx.appendChild(b)});
+ tabs.appendChild(w)});
 const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 function renderPanel(m){
  const fr=(lab,f)=>'<span class="pill '+f[0]+'">'+f[1]+'</span><div class="what"><b>'+lab+'</b>'+esc(f[2])+'</div>';
@@ -428,16 +541,18 @@ function renderPanel(m){
  '<div class="sec"><h3>'+esc(m.stepsTitle)+'</h3><ol>'+m.steps.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol></div>'+
  '<div class="cost"><h3 style="margin:0;font:600 12px/1.2 var(--f-body);letter-spacing:.06em;color:var(--muted)">ค่าใช้จ่ายโดยประมาณ</h3><div class="big">'+m.cost+'<small>'+m.cu+'</small></div><div class="sub">'+esc(m.unit)+(m.extra?' · '+esc(m.extra):'')+'</div></div></div>'+
  '<div class="pcol">'+(GL[m.id].length?'<div class="sec"><h3>มาตรฐาน คู่มือ และกรณีศึกษา</h3>'+glList(GL[m.id])+'</div>':'')+
- '<div class="sec"><h3>ดูวัสดุและภาพงานจริง</h3>'+refList(m.refs)+'</div></div>';
+ (m.refs.length?'<div class="sec"><h3>ดูวัสดุและภาพงานจริง</h3>'+refList(m.refs)+'</div>':'')+'</div>';
 }
 function refList(r){return '<ul class="rlist">'+r.map(([t,u,n])=>'<li><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>').join('')+'</ul>'}
 function glList(r){return '<ul class="rlist">'+r.map(k=>{const[c,t,u,n,cs]=GD[k];return '<li><span class="cd'+(cs?' case':'')+'">'+(cs?'กรณีศึกษา · ':'')+esc(c)+'</span><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(t)+'</a><span class="rn">'+esc(n)+'</span></li>'}).join('')+'</ul>'}
-document.getElementById('rgrid').innerHTML=M.map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+refList(m.refs)+'</div>').join('');
-document.getElementById('ggrid').innerHTML=M.filter(m=>GL[m.id].length).map(m=>'<div><h3><span class="k">'+m.k+'</span>'+esc(m.name)+'</h3>'+glList(GL[m.id])+'</div>').join('')+
+document.getElementById('rgrid').innerHTML=M.filter(m=>m.refs.length).map(m=>'<div><h3><span class="k">'+m.grp+'·'+m.k+'</span>'+esc(m.name)+'</h3>'+refList(m.refs)+'</div>').join('');
+document.getElementById('ggrid').innerHTML=M.filter(m=>GL[m.id].length).map(m=>'<div><h3><span class="k">'+m.grp+'·'+m.k+'</span>'+esc(m.name)+'</h3>'+glList(GL[m.id])+'</div>').join('')+
  '<div><h3><span class="k">TH</span>กฎหมายและมาตรฐานไทย</h3>'+glList(['tis1390','dpt','bca'])+'</div>';
 function select(i,instant){cur=i;const m=M[i];
- [...tabs.children].forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
- ['boil','ripple','urgent','A','B','C','D','E'].forEach(k=>G[k].visible=m.groups.includes(k));
+ tabs.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.i===i));
+ tabs.querySelectorAll('.tgroup').forEach(w=>w.classList.toggle('on',+w.dataset.g===m.grp));
+ ['boil','ripple','urgent','A','B','C','D','E','joint','j0','jF','jG','jH','jboil'].forEach(k=>G[k].visible=m.groups.includes(k));
+ soilMats.forEach(mm=>{const x=!!m.xray;mm.transparent=x;mm.opacity=x?.42:1;mm.depthWrite=!x;mm.needsUpdate=true});
  G.old.visible=!m.hideOld;crack.visible=m.crack!=='none';crackM.color.set(m.crack==='sealed'?0xd6a21e:0x3a2e26);
  buildParticles(m);setLabels(m);renderPanel(m);
  document.querySelectorAll('.crow').forEach(r=>r.classList.toggle('on',r.dataset.m===m.id));
@@ -454,6 +569,13 @@ const cg=document.getElementById('cgrid');
 CR.forEach(([n,id,a,b])=>{const r=document.createElement('button');r.type='button';r.className='crow'+(id==='pkg'?' pkg':'');r.dataset.m=id;
  r.innerHTML='<span class="n">'+n+'</span><span class="track"><span class="bar" style="left:'+lg(a)+'%;width:'+(lg(b)-lg(a))+'%"></span></span><span class="v">'+a.toLocaleString('en-US')+'–'+b.toLocaleString('en-US')+'</span>';
  const mi=M.findIndex(m=>m.id===id);if(mi>=0)r.onclick=()=>{select(mi);stage.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'})};else r.style.cursor='default';cg.appendChild(r)});
+const JLO=5000,JHI=200000,jl=v=>(Math.log(v)-Math.log(JLO))/(Math.log(JHI)-Math.log(JLO))*100;
+const JR=[['สำรวจรอยต่อ (เหมาจ่าย)','p3',20000,40000],['G ไส้ยืดหยุ่น + แผ่นปิด','G',10000,25000],['F แถบยางยึดอีพ็อกซี่','F',20000,45000],['H ปลั๊ก Jet grouting','H',45000,80000],['ชุดแนะนำ F+H ต่อจุด','pkg',65000,125000]];
+const jg=document.getElementById('jgrid');
+JR.forEach(([n,id,a,b])=>{const r=document.createElement('button');r.type='button';r.className='crow'+(id==='pkg'?' pkg':'');r.dataset.m=id;
+ r.innerHTML='<span class="n">'+n+'</span><span class="track"><span class="bar" style="left:'+jl(a)+'%;width:'+(jl(b)-jl(a))+'%"></span></span><span class="v">'+a.toLocaleString('en-US')+'–'+b.toLocaleString('en-US')+'</span>';
+ const mi=M.findIndex(m=>m.id===id);if(mi>=0)r.onclick=()=>{select(mi);stage.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'})};else r.style.cursor='default';jg.appendChild(r)});
+{const a2=document.createElement('div');a2.className='axis';a2.innerHTML='<span></span><div class="t">'+[5000,10000,30000,100000,200000].map(v=>'<span style="left:'+jl(v)+'%">'+fmt(v)+'</span>').join('')+'</div><span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:right">บาท/จุด</span>';jg.appendChild(a2);}
 const ax=document.createElement('div');ax.className='axis';ax.innerHTML='<span></span><div class="t">'+[500,1000,3000,10000,30000,100000].map(v=>'<span style="left:'+lg(v)+'%">'+fmt(v)+'</span>').join('')+'</div><span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:right">บาท/ม.</span>';cg.appendChild(ax);
 
 document.getElementById('play').onclick=e=>{playing=!playing;e.target.textContent=playing?'หยุดการไหล':'เล่นการไหล'};
@@ -461,7 +583,7 @@ document.getElementById('lblBtn').onclick=e=>{const off=lblBox.classList.toggle(
 document.getElementById('reset').onclick=()=>select(cur);
 const hIn=document.getElementById('head'),hOut=document.getElementById('headOut');
 function setHead(v){head=v;hOut.textContent=v.toFixed(1)+' ม.';waterTop.scale.y=Math.max(.001,v);waterTop.position.y=v/2;
- const g=M.find(m=>m.id==='problem');}
+}
 hIn.oninput=()=>setHead(parseFloat(hIn.value));setHead(0.6);
 
 // theme-aware stage colour
